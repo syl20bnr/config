@@ -1,0 +1,7 @@
+VimLauncher allows to launch files in only one unique instance of gVim and in a new tab.
+
+Setup:
+------
+Set the environment variable GVIM_EXECUTABLE to the gVim.exe executable absolute path (ie. C:\Program Files\Vim\VimXX\gVim.exe).
+
+(c) Sylvain Benner 2010
