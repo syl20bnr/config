@@ -1,3 +1,4 @@
+URxvt.perl-lib: /home/sylvain/.urxvt/urxvt-perls
 URxvt.scrollBar: False
 URxvt.geometry: 80x24
 URxvt.font: xft:Monospace:size=10
