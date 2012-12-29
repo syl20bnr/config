@@ -1,0 +1,3 @@
+[submodule ".urxvt/urxvt-perls"]
+	path = .urxvt/urxvt-perls
+	url = http://github.com/muennich/urxvt-perls
