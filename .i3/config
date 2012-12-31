@@ -12,7 +12,7 @@
 # fix for nvidia twinview
 force_xinerama yes
 
-set $mod Mod1
+set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 font xft:Sans bold 8
@@ -197,4 +197,4 @@ exec gnome-settings-daemon
 exec /usr/lib/indicator-ubuntuone/indicator-ubuntuone
 #exec /home/sbenner/.mouse_sens.sh
 exec xmodmap ~/.Xmodmap
-
+exec emacs --daemon
