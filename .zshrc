@@ -40,6 +40,18 @@ export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/u
 alias gv='gvim'
 gvim(){ setsid /usr/bin/gvim -f "$@"; }
 
+export EDITOR='emacsclient -t -n -a ""'
+alias ec='emacsclient -c -n -a ""'
+alias et='emacsclient -t -a ""'
+ecs() { emacsclient -c -n -a emacs "/sudo::$*" }
+ets() { emacsclient -t -a emacs "/sudo::$*" }
+
 #autoload alternative prompts which can be set on the fly
 autoload -Uz promptinit && promptinit -i
 
+#track current working directory for emacs
+if [ -n "$INSIDE_EMACS" ]; then
+  chpwd() { print -P "\033AnSiTc %d" }
+  print -P "\033AnSiTu %n"
+  print -P "\033AnSiTc %d"
+fi

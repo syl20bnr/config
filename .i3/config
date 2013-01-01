@@ -197,4 +197,3 @@ exec gnome-settings-daemon
 exec /usr/lib/indicator-ubuntuone/indicator-ubuntuone
 #exec /home/sbenner/.mouse_sens.sh
 exec xmodmap ~/.Xmodmap
-exec emacs --daemon
