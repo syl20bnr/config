@@ -1,0 +1,34 @@
+[general]
+accounts = username@gmail.com
+maxsyncaccounts = 3
+
+[Account username@gmail.com]
+localrepository = Local-username@gmail.com
+remoterepository = Remote-username@gmail.com
+
+[Repository Local-username@gmail.com]
+type = Maildir
+localfolders = ~/Maildir
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+
+[Repository Remote-username@gmail.com]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = username@gmail.com
+remotepass = password
+ssl = yes
+maxconnections = 1
+realdelete = no
+cert_fingerprint=fingerprint
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
