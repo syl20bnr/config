@@ -90,6 +90,16 @@ bindsym $mod+7 workspace 7: Various
 bindsym $mod+8 workspace 8: Various
 bindsym $mod+9 workspace 9: System
 bindsym $mod+0 workspace 10: System
+bindsym $mod+F1 workspace 11: Dev
+bindsym $mod+F2 workspace 12: Dev
+bindsym $mod+F3 workspace 13: SCM
+bindsym $mod+F4 workspace 14: SCM
+bindsym $mod+F5 workspace 15: Web
+bindsym $mod+F6 workspace 16: Web
+bindsym $mod+F7 workspace 17: Various
+bindsym $mod+F8 workspace 18: Various
+bindsym $mod+F9 workspace 19: System
+bindsym $mod+F10 workspace 20: System
 
 # move focused container to workspace
 bindsym $mod+Shift+exclam move workspace 1: Dev
@@ -102,6 +112,16 @@ bindsym $mod+Shift+ampersand move workspace 7: Various
 bindsym $mod+Shift+asterisk move workspace 8: Various
 bindsym $mod+Shift+parenleft move workspace 9: System
 bindsym $mod+Shift+parenright move workspace 10: System
+bindsym $mod+Shift+F1 move workspace 11: Dev
+bindsym $mod+Shift+F2 move workspace 12: Dev
+bindsym $mod+Shift+F3 Move workspace 13: SCM
+bindsym $mod+Shift+F4 move workspace 14: SCM
+bindsym $mod+Shift+F5 move workspace 15: Web
+bindsym $mod+Shift+F6 move workspace 16: Web
+bindsym $mod+Shift+F7 move workspace 17: Various
+bindsym $mod+Shift+F8 move workspace 18: Various
+bindsym $mod+Shift+F9 move workspace 19: System
+bindsym $mod+Shift+F10 move workspace 20: System
 
 # named workspaces
 workspace "1: Dev" output xinerama-0
@@ -114,6 +134,16 @@ workspace "7: Various" output xinerama-0
 workspace "8: Various" output xinerama-1
 workspace "9: System" output xinerama-0
 workspace "10: System" output xinerama-1
+workspace "11: Dev" output xinerama-0
+workspace "12: Dev" output xinerama-1
+workspace "13: SCM" output xinerama-0
+workspace "14: SCM" output xinerama-1
+workspace "15: Web" output xinerama-0
+workspace "16: Web" output xinerama-1
+workspace "17: Various" output xinerama-0
+workspace "18: Various" output xinerama-1
+workspace "19: System" output xinerama-0
+workspace "20: System" output xinerama-1
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
@@ -125,39 +155,35 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
         # They resize the border in the direction you pressed, e.g.
         # when pressing left, the window is resized so that it has
         # more space on its left
+	bindsym j resize shrink left 2 px or 2 ppt
+	bindsym Shift+J resize grow   left 2 px or 2 ppt
 
-bindsym j resize shrink left 2 px or 2 ppt
-bindsym Shift+J resize grow   left 2 px or 2 ppt
+	bindsym k resize shrink down 2 px or 2 ppt
+	bindsym Shift+K resize grow   down 2 px or 2 ppt
 
-bindsym k resize shrink down 2 px or 2 ppt
-bindsym Shift+K resize grow   down 2 px or 2 ppt
+	bindsym l resize shrink up 2 px or 2 ppt
+	bindsym Shift+L resize grow   up 2 px or 2 ppt
 
-bindsym l resize shrink up 2 px or 2 ppt
-bindsym Shift+L resize grow   up 2 px or 2 ppt
-
-bindsym semicolon resize shrink right 2 px or 2 ppt
-bindsym Shift+colon resize grow   right 2 px or 2 ppt
-
+	bindsym semicolon resize shrink right 2 px or 2 ppt
+	bindsym Shift+colon resize grow   right 2 px or 2 ppt
         # same bindings, but for the arrow keys
-bindsym Left resize shrink left 2 px or 2 ppt
-bindsym Shift+Left resize grow   left 2 px or 2 ppt
+	bindsym Left resize shrink left 2 px or 2 ppt
+	bindsym Shift+Left resize grow   left 2 px or 2 ppt
 
-bindsym Down resize shrink down 2 px or 2 ppt
-bindsym Shift+Down resize grow   down 2 px or 2 ppt
+	bindsym Down resize shrink down 2 px or 2 ppt
+	bindsym Shift+Down resize grow   down 2 px or 2 ppt
 
-bindsym Up resize shrink up 2 px or 2 ppt
-bindsym Shift+Up resize grow   up 2 px or 2 ppt
+	bindsym Up resize shrink up 2 px or 2 ppt
+	bindsym Shift+Up resize grow   up 2 px or 2 ppt
 
-bindsym Right resize shrink right 2 px or 2 ppt
-bindsym Shift+Right resize grow   right 2 px or 2 ppt
-
+	bindsym Right resize shrink right 2 px or 2 ppt
+	bindsym Shift+Right resize grow   right 2 px or 2 ppt
         # back to normal: Enter or Escape
-bindsym Return mode "default"
-bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
