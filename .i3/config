@@ -28,6 +28,7 @@ bindsym $mod+Shift+X kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+bindsym $mod+g exec ~/.i3/scripts/winmenu.py
 
 # change focus
 bindsym $mod+h focus left
@@ -199,7 +200,7 @@ client.urgent #2f343a #900000 #ffffff #900000
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command    i3status
+    status_command    i3status+
     position          bottom
     mode              dock
     workspace_buttons yes
