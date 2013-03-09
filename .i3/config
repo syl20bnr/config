@@ -27,7 +27,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+X kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec i3-dmenu-desktop
 bindsym $mod+g exec ~/.i3/scripts/winmenu.py
 
 # change focus
