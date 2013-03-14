@@ -108,7 +108,7 @@ bindsym $mod+Shift+at move workspace 2: Dev
 bindsym $mod+Shift+numbersign move workspace 3: SCM
 bindsym $mod+Shift+dollar move workspace 4: SCM
 bindsym $mod+Shift+percent move workspace 5: Web
-bindsym $mod+Shift+dead_circumflex move workspace 6: Web
+bindsym $mod+Shift+asciicircum move workspace 6: Web
 bindsym $mod+Shift+ampersand move workspace 7: Various
 bindsym $mod+Shift+asterisk move workspace 8: Various
 bindsym $mod+Shift+parenleft move workspace 9: System
