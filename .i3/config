@@ -27,7 +27,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+X kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec i3-dmenu-desktop
+bindsym $mod+d exec dmenu_run
 bindsym $mod+g exec ~/.i3/scripts/winmenu.py
 
 # change focus
@@ -56,9 +56,11 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+b split h
+bindsym $mod+Shift+B layout splith
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+V split v
+bindsym $mod+Shift+V layout splitv
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -149,40 +151,34 @@ workspace "20: System" output xinerama-1
 # reload the configuration file
 bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+V restart
+bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # They resize the border in the direction you pressed, e.g.
-        # when pressing left, the window is resized so that it has
-        # more space on its left
-	bindsym j resize shrink left 2 px or 2 ppt
-	bindsym Shift+J resize grow   left 2 px or 2 ppt
-
-	bindsym k resize shrink down 2 px or 2 ppt
-	bindsym Shift+K resize grow   down 2 px or 2 ppt
-
-	bindsym l resize shrink up 2 px or 2 ppt
-	bindsym Shift+L resize grow   up 2 px or 2 ppt
-
-	bindsym semicolon resize shrink right 2 px or 2 ppt
-	bindsym Shift+colon resize grow   right 2 px or 2 ppt
-        # same bindings, but for the arrow keys
-	bindsym Left resize shrink left 2 px or 2 ppt
-	bindsym Shift+Left resize grow   left 2 px or 2 ppt
-
-	bindsym Down resize shrink down 2 px or 2 ppt
-	bindsym Shift+Down resize grow   down 2 px or 2 ppt
-
-	bindsym Up resize shrink up 2 px or 2 ppt
-	bindsym Shift+Up resize grow   up 2 px or 2 ppt
-
-	bindsym Right resize shrink right 2 px or 2 ppt
-	bindsym Shift+Right resize grow   right 2 px or 2 ppt
-        # back to normal: Enter or Escape
+    # These bindings trigger as soon as you enter the resize mode
+    # They resize the border in the direction you pressed, e.g.
+    # when pressing left, the window is resized so that it has
+    # more space on its left
+	bindsym Shift+H     resize shrink left 2 px or 2 ppt
+	bindsym h           resize grow   left 2 px or 2 ppt
+	bindsym Shift+J     resize shrink down 2 px or 2 ppt
+	bindsym j           resize grow   down 2 px or 2 ppt
+	bindsym Shift+K     resize shrink up 2 px or 2 ppt
+	bindsym k           resize grow   up 2 px or 2 ppt
+	bindsym Shift+L     resize shrink right 2 px or 2 ppt
+	bindsym l           resize grow   right 2 px or 2 ppt
+    # same bindings, but for the arrow keys
+	bindsym Shift+Left  resize shrink left 2 px or 2 ppt
+	bindsym Left resize grow   left 2 px or 2 ppt
+	bindsym Shift+Down  resize shrink down 2 px or 2 ppt
+	bindsym Down        resize grow   down 2 px or 2 ppt
+	bindsym Shift+Up    resize shrink up 2 px or 2 ppt
+	bindsym Up          resize grow   up 2 px or 2 ppt
+	bindsym Shift+Right resize shrink right 2 px or 2 ppt
+	bindsym Right       resize grow   right 2 px or 2 ppt
+    # back to normal: Enter or Escape
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
@@ -218,7 +214,7 @@ bar {
 }
 
 # lock
-bindsym $mod+z exec i3lock -c 888888
+bindsym $mod+z exec i3lock -c 000000
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -231,10 +227,7 @@ bindsym $mod+minus scratchpad show
 exec synergy
 exec gnome-settings-daemon
 exec /home/sbenner/.mouse_sens.sh
-#exec xmodmap /home/sbenner/.Xmodmap
-#for_window [class="Vlc" instance="vlc"] floating enable
-exec vlc
-for_window [class="Vlc" instance="vlc"] move scratchpad
+exec fluxgui
 
 
 
