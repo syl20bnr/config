@@ -221,13 +221,15 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
+# Special window properties
+for_window [class="Emacs"] border none
+
 # execute daemons
 #exec u1sdtool --start
 #exec radiotray
 exec synergy
 exec gnome-settings-daemon
 exec /home/sbenner/.mouse_sens.sh
-exec fluxgui
 
 
 
