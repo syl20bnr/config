@@ -1,16 +1,31 @@
-# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 if [[ $EMACS == "" ]]; then
+  # regular mode
   ZSH_THEME="syl20bnr"
   plugins=(git vi-mode)
 else
+  # runs inside an emacs process
   ZSH_THEME="robbyrussell"
+  chpwd() { print -P "\033AnSiTc %d" }
+  print -P "\033AnSiTu %n"
+  print -P "\033AnSiTc %d"
 fi
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+export PATH=/home/sbenner/.rbenv/shims:/home/sbenner/.rbenv/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+# Always launch a ranger session
+if [[ $RANGER == "" ]]; then
+  export RANGER=1
+  ranger
+fi
+
+# script ends here
+
+# Some doc
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -33,8 +48,3 @@ fi
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
-
-source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
-export PATH=/home/sbenner/.rbenv/shims:/home/sbenner/.rbenv/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
