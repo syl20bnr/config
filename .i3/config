@@ -83,8 +83,8 @@ bindsym $mod+a focus parent
 #bindcode $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1: Dev
-bindsym $mod+2 workspace 2: Dev
+bindsym $mod+1 workspace 1: Code
+bindsym $mod+2 workspace 2: Code
 bindsym $mod+3 workspace 3: SCM
 bindsym $mod+4 workspace 4: SCM
 bindsym $mod+5 workspace 5: Web
@@ -93,8 +93,8 @@ bindsym $mod+7 workspace 7: Various
 bindsym $mod+8 workspace 8: Various
 bindsym $mod+9 workspace 9: System
 bindsym $mod+0 workspace 10: System
-bindsym $mod+F1 workspace 11: Dev
-bindsym $mod+F2 workspace 12: Dev
+bindsym $mod+F1 workspace 11: Code
+bindsym $mod+F2 workspace 12: Code
 bindsym $mod+F3 workspace 13: SCM
 bindsym $mod+F4 workspace 14: SCM
 bindsym $mod+F5 workspace 15: Web
@@ -105,8 +105,8 @@ bindsym $mod+F9 workspace 19: System
 bindsym $mod+F10 workspace 20: System
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1: Dev
-bindsym $mod+Shift+at move workspace 2: Dev
+bindsym $mod+Shift+exclam move workspace 1: Code
+bindsym $mod+Shift+at move workspace 2: Code
 bindsym $mod+Shift+numbersign move workspace 3: SCM
 bindsym $mod+Shift+dollar move workspace 4: SCM
 bindsym $mod+Shift+percent move workspace 5: Web
@@ -115,8 +115,8 @@ bindsym $mod+Shift+ampersand move workspace 7: Various
 bindsym $mod+Shift+asterisk move workspace 8: Various
 bindsym $mod+Shift+parenleft move workspace 9: System
 bindsym $mod+Shift+parenright move workspace 10: System
-bindsym $mod+Shift+F1 move workspace 11: Dev
-bindsym $mod+Shift+F2 move workspace 12: Dev
+bindsym $mod+Shift+F1 move workspace 11: Code
+bindsym $mod+Shift+F2 move workspace 12: Code
 bindsym $mod+Shift+F3 Move workspace 13: SCM
 bindsym $mod+Shift+F4 move workspace 14: SCM
 bindsym $mod+Shift+F5 move workspace 15: Web
@@ -127,8 +127,8 @@ bindsym $mod+Shift+F9 move workspace 19: System
 bindsym $mod+Shift+F10 move workspace 20: System
 
 # named workspaces
-workspace "1: Dev" output xinerama-0
-workspace "2: Dev" output xinerama-1
+workspace "1: Code" output xinerama-0
+workspace "2: Code" output xinerama-1
 workspace "3: SCM" output xinerama-0
 workspace "4: SCM" output xinerama-1
 workspace "5: Web" output xinerama-0
@@ -137,8 +137,8 @@ workspace "7: Various" output xinerama-0
 workspace "8: Various" output xinerama-1
 workspace "9: System" output xinerama-0
 workspace "10: System" output xinerama-1
-workspace "11: Dev" output xinerama-0
-workspace "12: Dev" output xinerama-1
+workspace "11: Code" output xinerama-0
+workspace "12: Code" output xinerama-1
 workspace "13: SCM" output xinerama-0
 workspace "14: SCM" output xinerama-1
 workspace "15: Web" output xinerama-0
@@ -223,6 +223,9 @@ bindsym $mod+minus scratchpad show
 
 # Special window properties
 for_window [class="Emacs"] border none
+for_window [class="Chromium"] border none
+for_window [class="P4v"] border none
+for_window [title="yEd"] border none
 
 # execute daemons
 #exec u1sdtool --start
@@ -230,6 +233,7 @@ for_window [class="Emacs"] border none
 exec synergy
 exec gnome-settings-daemon
 exec /home/sbenner/.mouse_sens.sh
+#exec fluxgui
 
 
 
