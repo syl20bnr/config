@@ -224,7 +224,6 @@ bindsym $mod+minus scratchpad show
 # Special window properties
 for_window [class="Emacs"] border none
 for_window [class="Chromium"] border none
-for_window [class="P4v"] border none
 for_window [title="yEd"] border none
 
 # execute daemons
