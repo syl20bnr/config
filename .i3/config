@@ -214,7 +214,7 @@ bar {
 }
 
 # lock
-bindsym $mod+z exec i3lock -i ~/.img/ubisoft.png
+bindsym $mod+z exec i3lock -i ~/.img/ubisoft_fullhd.png
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -232,7 +232,7 @@ exec gnome-settings-daemon
 exec dunst
 exec u1sdtool --start
 exec /usr/lib/indicator-ubuntuone/indicator-ubuntuone
-exec feh --bg-fill ~/.img/atlanticpuffin224.jpg
+exec feh --bg-fill ~/.img/atlanticpuffin_low.jpg
 #exec radiotray
 #exec synergy
 #exec my-weather-indicator
