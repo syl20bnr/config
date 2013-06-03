@@ -48,10 +48,10 @@ set nowrap                       "no word wrapping
 set nobackup                     "disable swap, backup files
 set nowritebackup                "no backup file on writing
 set noswapfile                   "no swap file
-set foldmethod=indent            "always used automatic fold based on indentation
+"set foldmethod=indent            "always used automatic fold based on indentation
 set guioptions-=m                "remove menu bar
 set clipboard=unnamedplus        "yank/past to both system clipboard
-set colorcolumn=80               "print margin
+"set colorcolumn=80               "print margin
 "disable beeps
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
@@ -105,7 +105,7 @@ nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " remap escape
-ino jj <esc>
+ino fd <esc>
 vno v <esc>
 
 " Enable neocomplcache

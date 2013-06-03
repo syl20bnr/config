@@ -8,6 +8,13 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-g: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.underline: true
+Xft*dpi: 96
+Xft*antialias: true
+Xft*hinting: full
+URxvt.transparent: true
+URxvt.tintColor: white
+URxvt.shading: 20
+URxvt*fading: 36
 
 ! solarized colors
 URxvt.background:            #002b36
