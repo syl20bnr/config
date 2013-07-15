@@ -83,70 +83,70 @@ bindsym $mod+a focus parent
 #bindcode $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1: Code
-bindsym $mod+2 workspace 2: Code
-bindsym $mod+3 workspace 3: SCM
-bindsym $mod+4 workspace 4: SCM
+bindsym $mod+1 workspace 1: Terminal
+bindsym $mod+2 workspace 2: Terminal
+bindsym $mod+3 workspace 3: Code
+bindsym $mod+4 workspace 4: Code
 bindsym $mod+5 workspace 5: Web
 bindsym $mod+6 workspace 6: Web
-bindsym $mod+7 workspace 7: Various
-bindsym $mod+8 workspace 8: Various
-bindsym $mod+9 workspace 9: System
-bindsym $mod+0 workspace 10: System
-bindsym $mod+F1 workspace 11: Code
-bindsym $mod+F2 workspace 12: Code
-bindsym $mod+F3 workspace 13: SCM
-bindsym $mod+F4 workspace 14: SCM
+bindsym $mod+7 workspace 7: SCM
+bindsym $mod+8 workspace 8: SCM
+bindsym $mod+9 workspace 9: Various
+bindsym $mod+0 workspace 10: Various
+bindsym $mod+F1 workspace 11: Terminal
+bindsym $mod+F2 workspace 12: Terminal
+bindsym $mod+F3 workspace 13: Code
+bindsym $mod+F4 workspace 14: Code
 bindsym $mod+F5 workspace 15: Web
 bindsym $mod+F6 workspace 16: Web
-bindsym $mod+F7 workspace 17: Various
-bindsym $mod+F8 workspace 18: Various
-bindsym $mod+F9 workspace 19: System
-bindsym $mod+F10 workspace 20: System
+bindsym $mod+F7 workspace 17: SCM
+bindsym $mod+F8 workspace 18: SCM
+bindsym $mod+F9 workspace 19: Various
+bindsym $mod+F10 workspace 20: Various
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1: Code
-bindsym $mod+Shift+at move workspace 2: Code
-bindsym $mod+Shift+numbersign move workspace 3: SCM
-bindsym $mod+Shift+dollar move workspace 4: SCM
+bindsym $mod+Shift+exclam move workspace 1: Terminal
+bindsym $mod+Shift+at move workspace 2: Terminal
+bindsym $mod+Shift+numbersign move workspace 3: Code
+bindsym $mod+Shift+dollar move workspace 4: Code
 bindsym $mod+Shift+percent move workspace 5: Web
 bindsym $mod+Shift+asciicircum move workspace 6: Web
-bindsym $mod+Shift+ampersand move workspace 7: Various
-bindsym $mod+Shift+asterisk move workspace 8: Various
-bindsym $mod+Shift+parenleft move workspace 9: System
-bindsym $mod+Shift+parenright move workspace 10: System
-bindsym $mod+Shift+F1 move workspace 11: Code
-bindsym $mod+Shift+F2 move workspace 12: Code
-bindsym $mod+Shift+F3 Move workspace 13: SCM
-bindsym $mod+Shift+F4 move workspace 14: SCM
+bindsym $mod+Shift+ampersand move workspace 7: SCM
+bindsym $mod+Shift+asterisk move workspace 8: SCM
+bindsym $mod+Shift+parenleft move workspace 9: Various
+bindsym $mod+Shift+parenright move workspace 10: Various
+bindsym $mod+Shift+F1 move workspace 11: Terminal
+bindsym $mod+Shift+F2 move workspace 12: Terminal
+bindsym $mod+Shift+F3 Move workspace 13: Code
+bindsym $mod+Shift+F4 move workspace 14: Code
 bindsym $mod+Shift+F5 move workspace 15: Web
 bindsym $mod+Shift+F6 move workspace 16: Web
-bindsym $mod+Shift+F7 move workspace 17: Various
-bindsym $mod+Shift+F8 move workspace 18: Various
-bindsym $mod+Shift+F9 move workspace 19: System
-bindsym $mod+Shift+F10 move workspace 20: System
+bindsym $mod+Shift+F7 move workspace 17: SCM
+bindsym $mod+Shift+F8 move workspace 18: SCM
+bindsym $mod+Shift+F9 move workspace 19: Various
+bindsym $mod+Shift+F10 move workspace 20: Various
 
 # named workspaces
-workspace "1: Code" output xinerama-0
-workspace "2: Code" output xinerama-1
-workspace "3: SCM" output xinerama-0
-workspace "4: SCM" output xinerama-1
+workspace "1: Terminal" output xinerama-0
+workspace "2: Terminal" output xinerama-1
+workspace "3: Code" output xinerama-0
+workspace "4: Code" output xinerama-1
 workspace "5: Web" output xinerama-0
 workspace "6: Web" output xinerama-1
-workspace "7: Various" output xinerama-0
-workspace "8: Various" output xinerama-1
-workspace "9: System" output xinerama-0
-workspace "10: System" output xinerama-1
-workspace "11: Code" output xinerama-0
-workspace "12: Code" output xinerama-1
-workspace "13: SCM" output xinerama-0
-workspace "14: SCM" output xinerama-1
+workspace "7: SCM" output xinerama-0
+workspace "8: SCM" output xinerama-1
+workspace "9: Various" output xinerama-0
+workspace "10: Various" output xinerama-1
+workspace "11: Terminal" output xinerama-0
+workspace "12: Terminal" output xinerama-1
+workspace "13: Code" output xinerama-0
+workspace "14: Code" output xinerama-1
 workspace "15: Web" output xinerama-0
 workspace "16: Web" output xinerama-1
-workspace "17: Various" output xinerama-0
-workspace "18: Various" output xinerama-1
-workspace "19: System" output xinerama-0
-workspace "20: System" output xinerama-1
+workspace "17: SCM" output xinerama-0
+workspace "18: SCM" output xinerama-1
+workspace "19: Various" output xinerama-0
+workspace "20: Various" output xinerama-1
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
