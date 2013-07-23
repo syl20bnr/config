@@ -1,0 +1,3 @@
+#!/bin/sh
+/usr/bin/chromium-browser --app="http://www.grooveshark.com"
+
