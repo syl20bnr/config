@@ -20,7 +20,7 @@ export PATH=/home/sbenner/.rbenv/shims:/home/sbenner/.rbenv/bin:/usr/lib/lightdm
 # Always launch a ranger session
 if [[ $RANGER == "" ]]; then
   export RANGER=1
-  ranger
+  ranger "`pwd`"
 fi
 
 # script ends here
