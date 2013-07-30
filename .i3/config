@@ -77,14 +77,15 @@ bindsym $mod+e layout default
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
-# bindsym $mod+space focus mode_toggle
-
 # focus the parent container
 bindsym $mod+a focus parent
-
 # focus the child container
 #bindcode $mod+d focus child
+
+# focus the previously active workspace
+bindsym $mod+p workspace back_and_forth
+# move workspace to previously active workspace
+bindsym $mod+Shift+p move container to workspace back_and_forth
 
 # switch to workspace
 bindsym $mod+1 workspace 1: Terminal
@@ -191,7 +192,8 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 bar {
     status_command    i3status+
     position          top
-    mode              dock
+    mode              hide
+    modifier          $mod
     workspace_buttons yes
     tray_output       primary
 
@@ -205,7 +207,7 @@ bar {
     }
 }
 
-# class                  border  backgr. text    indicator
+# class                  border  backgr. text    indicator (empty to keep default colors)
 client.urgent            #073642 #859900 #073642
 client.focused           #859900 #859900 #eee8d5
 client.focused_inactive  #859900 #002b36 #657b83
