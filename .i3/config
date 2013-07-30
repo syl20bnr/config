@@ -17,6 +17,13 @@ set $mod Mod1
 # font for window titles. ISO 10646 = Unicode
 font xft:Ubuntu bold  8
 
+# reload the configuration file
+bindsym $mod+Shift+C reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+R restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quit X session?' -b '     Yes' 'i3-msg exit'"
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -145,13 +152,6 @@ bindsym $mod+Shift+F10 move workspace 20: Various
 #workspace "19: Various" output xinerama-0
 #workspace "20: Various" output xinerama-1
 
-# reload the configuration file
-bindsym $mod+Shift+C reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+R restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
@@ -212,7 +212,7 @@ client.focused_inactive  #859900 #002b36 #657b83
 client.unfocused         #073642 #002b36 #657b83
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -i -b -p 'Launch Application -> ' -nb '#002b36' -nf '#657b83' -sb '#859900' -sf '#000000'
+bindsym $mod+d exec dmenu_run -i -b -p 'Launch Application -> ' -nb '#002b36' -nf '#657b83' -sb '#859900' -sf '#eee8d5'
 bindsym $mod+g exec ~/.i3/scripts/winmenu.py
 
 # lock
