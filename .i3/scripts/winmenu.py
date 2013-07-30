@@ -7,9 +7,12 @@
 # http://sam.zoy.org/wtfpl/COPYING
 #
 # edited by Jure Ziberna for i3-py's examples section
+#
+# Customized by Sylvain Benner for solarized colors.
 
 import i3
 import subprocess
+
 
 def i3clients():
     """
@@ -17,7 +20,7 @@ def i3clients():
     Each window text is of format "[workspace] window title (instance number)"
     """
     clients = {}
-    for ws_num in range(1,11):
+    for ws_num in range(1, 11):
         workspace = i3.filter(num=ws_num)
         if not workspace:
             continue
@@ -36,21 +39,26 @@ def i3clients():
             clients[win_str] = window['id']
     return clients
 
+
 def win_menu(clients, l=10):
     """
     Displays a window menu using dmenu. Returns window id.
     """
-    dmenu = subprocess.Popen(['/usr/bin/dmenu','-i','-l', str(l)],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
+    dmenu = subprocess.Popen(['/usr/bin/dmenu',
+                              '-i', '-l', str(l), '-b',
+                              '-p', 'Go to window -> ',
+                              '-nb', '#002b36', '-nf', '#657b83',
+                              '-sb', '#859900', '-sf', '#eee8d5'],
+                             stdin=subprocess.PIPE,
+                             stdout=subprocess.PIPE)
     menu_str = '\n'.join(sorted(clients.keys()))
     # Popen.communicate returns a tuple stdout, stderr
-    win_str = dmenu.communicate(menu_str.encode('utf-8'))[0].decode('utf-8').rstrip()
+    win_str = dmenu.communicate(
+        menu_str.encode('utf-8'))[0].decode('utf-8').rstrip()
     return clients.get(win_str, None)
 
 if __name__ == '__main__':
     clients = i3clients()
-    win_id = win_menu(clients)
+    win_id = win_menu(clients, 16)
     if win_id:
         i3.focus(con_id=win_id)
-
