@@ -159,26 +159,26 @@ mode "resize" {
     # They resize the border in the direction you pressed, e.g.
     # when pressing left, the window is resized so that it has
     # more space on its left
-	bindsym Shift+H     resize shrink left 2 px or 2 ppt
-	bindsym h           resize grow   left 2 px or 2 ppt
-	bindsym Shift+J     resize shrink down 2 px or 2 ppt
-	bindsym j           resize grow   down 2 px or 2 ppt
-	bindsym Shift+K     resize shrink up 2 px or 2 ppt
-	bindsym k           resize grow   up 2 px or 2 ppt
-	bindsym Shift+L     resize shrink right 2 px or 2 ppt
-	bindsym l           resize grow   right 2 px or 2 ppt
+    bindsym Shift+H     resize shrink left 2 px or 2 ppt
+    bindsym h           resize grow   left 2 px or 2 ppt
+    bindsym Shift+J     resize shrink down 2 px or 2 ppt
+    bindsym j           resize grow   down 2 px or 2 ppt
+    bindsym Shift+K     resize shrink up 2 px or 2 ppt
+    bindsym k           resize grow   up 2 px or 2 ppt
+    bindsym Shift+L     resize shrink right 2 px or 2 ppt
+    bindsym l           resize grow   right 2 px or 2 ppt
     # same bindings, but for the arrow keys
-	bindsym Shift+Left  resize shrink left 2 px or 2 ppt
-	bindsym Left resize grow   left 2 px or 2 ppt
-	bindsym Shift+Down  resize shrink down 2 px or 2 ppt
-	bindsym Down        resize grow   down 2 px or 2 ppt
-	bindsym Shift+Up    resize shrink up 2 px or 2 ppt
-	bindsym Up          resize grow   up 2 px or 2 ppt
-	bindsym Shift+Right resize shrink right 2 px or 2 ppt
-	bindsym Right       resize grow   right 2 px or 2 ppt
+    bindsym Shift+Left  resize shrink left 2 px or 2 ppt
+    bindsym Left resize grow   left 2 px or 2 ppt
+    bindsym Shift+Down  resize shrink down 2 px or 2 ppt
+    bindsym Down        resize grow   down 2 px or 2 ppt
+    bindsym Shift+Up    resize shrink up 2 px or 2 ppt
+    bindsym Up          resize grow   up 2 px or 2 ppt
+    bindsym Shift+Right resize shrink right 2 px or 2 ppt
+    bindsym Right       resize grow   right 2 px or 2 ppt
     # back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -226,7 +226,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Special window properties
-for_window [class="Emacs"] border 1pixel
+for_window [class="Emacs"] border none
 for_window [class="Chromium"] border 1pixel
 for_window [title="yEd"] border 1pixel
 for_window [title="urxvt"] border 1pixel
