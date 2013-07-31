@@ -209,14 +209,42 @@ bindsym $mod+r mode "resize"
 
 mode apps {
     bindcode 64 mode "default"
-
-    bindsym $mod+c exec chromium-browser
-    bindsym $mod+e exec emacs
-    bindsym $mod+t exec urxvt
-    bindsym $mod+Shift+T exec xcwd | xargs urxvt -cd
-    bindsym $mod+y exec yEd
+    bindsym $mod+m mode "music-apps"
+    bindsym $mod+p mode "prog-apps"
+    bindsym $mod+s mode "sys-apps"
+    bindsym $mod+w mode "web-apps"
 }
 bindsym $mod+a mode "apps"
+
+mode music-apps {
+    bindcode 64 mode "default"
+
+    bindsym $mod+g exec grooveshark
+    bindsym $mod+p exec psytrancepower
+}
+
+mode prog-apps {
+    bindcode 64 mode "default"
+
+    bindsym $mod+e exec emacs
+    bindsym $mod+y exec yEd
+}
+
+mode sys-apps {
+    bindcode 64 mode "default"
+
+    bindsym $mod+d exec dconf-editor
+    bindsym $mod+t exec urxvt
+    bindsym $mod+Shift+T exec xcwd | xargs urxvt -cd
+}
+
+mode web-apps {
+    bindcode 64 mode "default"
+
+    bindsym $mod+c exec chromium-browser
+    bindsym $mod+f exec freenode
+    bindsym $mod+G exec googegroups
+}
 
 # start a terminal
 bindsym $mod+Return exec urxvt
