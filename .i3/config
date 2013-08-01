@@ -51,9 +51,10 @@ for_window [title="urxvt"] border 1pixel
 
 # i3 bar
 bar {
+    id                main
     status_command    i3status+
     position          top
-    mode              dock
+    mode              hide
     modifier          $mod
     workspace_buttons yes
     tray_output       primary
