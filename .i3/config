@@ -142,6 +142,7 @@ set $goto    i3 > goto
 set $gotok   i3 > goto > work
 set $gotom   i3 > goto > music
 set $gotop   i3 > goto > prog
+set $gotow   i3 > goto > web
 set $mon     i3 > monitor
 set $resize  i3 > resize
 
@@ -170,6 +171,7 @@ mode "$gotok" {
     bindsym       g           [instance=virga-gitlab.ubisoft.org] focus
     bindsym       j           [instance=virga-jenkins.ubisoft.org] focus
     bindsym       p           [instance=virga-portal.ubisoft.org] focus
+    bindsym       q           [instance=virga-quickbuild.ubisoft.org] focus
     bindsym       r           [instance=virga-rb.ubisoft.org] focus
     bindsym       w           [instance=teamlink.ubisoft.org__Stratus] focus
 }
@@ -313,6 +315,7 @@ mode "$work" {
     bindsym       g           exec virga-gitlab
     bindsym       j           exec virga-jenkins
     bindsym       p           exec virga-portal
+    bindsym       q           exec virga-quickbuild
     bindsym       r           exec virga-rb
     bindsym       w           exec stratus-wiki
 }
