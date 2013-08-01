@@ -139,8 +139,9 @@ set $sys     i3 > apps > system
 set $web     i3 > apps > web
 set $work    i3 > apps > work
 set $goto    i3 > goto
+set $gotok   i3 > goto > work
 set $gotom   i3 > goto > music
-set $gotow   i3 > goto > work
+set $gotop   i3 > goto > prog
 set $mon     i3 > monitor
 set $resize  i3 > resize
 
@@ -152,11 +153,25 @@ mode "$goto" {
     bindcode $quitmode        mode $default
     bindcode $modekeycodeL    mode $default
     bindcode $modekeycodeR    mode $default
+    bindsym       k           mode $gotok
     bindsym       m           mode $gotom
+    bindsym       p           mode $gotop
     bindsym       w           mode $gotow
+}
+
+mode "$gotok" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmodekeycode   mode $goto
+    bindcode $quitmode        mode $default
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       c           [instance=chromium-browser] focus
-    bindsym       e           [class=Emacs] focus
+    bindsym       4           [instance=p4v.bin] focus
+    bindsym       g           [instance=virga-gitlab.ubisoft.org] focus
+    bindsym       j           [instance=virga-jenkins.ubisoft.org] focus
+    bindsym       p           [instance=virga-portal.ubisoft.org] focus
+    bindsym       r           [instance=virga-rb.ubisoft.org] focus
+    bindsym       w           [instance=teamlink.ubisoft.org__Stratus] focus
 }
 
 mode "$gotom" {
@@ -170,6 +185,17 @@ mode "$gotom" {
     bindsym       p           [instance=www.psytrancepower.com] focus
 }
 
+mode "$gotop" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmodekeycode   mode $goto
+    bindcode $quitmode        mode $default
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
+    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       e           [class=Emacs] focus
+    bindsym shift+g           [instance=github.com] focus
+}
+
 mode "$gotow" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
     bindcode $upmodekeycode   mode $goto
@@ -177,9 +203,8 @@ mode "$gotow" {
     bindcode $modekeycodeL    mode $default
     bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       j           [instance=virga-jenkins.ubisoft.org] focus
-    bindsym       p           [instance=virga-portal.ubisoft.org] focus
-    bindsym       w           [instance=teamlink.ubisoft.org__Stratus] focus
+    bindsym       c           [instance=chromium-browser] focus
+    bindsym       f           [class=Firefox] focus
 }
 
 # Mode: monitor ----------------------------------------------------------
@@ -228,14 +253,6 @@ mode "$apps" {
     bindsym       p           mode $prog
     bindsym       s           mode $sys
     bindsym       w           mode $web
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       4           exec p4v
-    bindsym       e           exec emacs
-    bindsym shift+e           exec eclipse
-    bindsym shift+g           exec github
-    bindsym       t           exec urxvt
-    bindsym shift+t           exec xcwd | xargs urxvt -cd
-    bindsym       y           exec yEd
 }
 
 mode "$music" {
@@ -256,9 +273,11 @@ mode "$prog" {
     bindcode $modekeycodeL    mode $default
     bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       4           exec p4v
     bindsym       e           exec emacs
     bindsym shift+e           exec eclipse
+    bindsym       f           exec freenode
+    bindsym       g           exec googegroups
+    bindsym shift+g           exec github
     bindsym       y           exec yEd
 }
 
@@ -270,8 +289,6 @@ mode "$sys" {
     bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       d           exec dconf-editor
-    bindsym       t           exec urxvt
-    bindsym shift+t           exec xcwd | xargs urxvt -cd
 }
 
 mode "$web" {
@@ -282,9 +299,7 @@ mode "$web" {
     bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       c           exec chromium-browser
-    bindsym       f           exec freenode
-    bindsym       g           exec googegroups
-    bindsym shift+g           exec github
+    bindsym       f           exec firefox
 }
 
 mode "$work" {
@@ -294,8 +309,11 @@ mode "$work" {
     bindcode $modekeycodeL    mode $default
     bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       4           exec p4v
+    bindsym       g           exec virga-gitlab
     bindsym       j           exec virga-jenkins
     bindsym       p           exec virga-portal
+    bindsym       r           exec virga-rb
     bindsym       w           exec stratus-wiki
 }
 
@@ -358,6 +376,7 @@ mode "$i3" {
     bindsym       d           exec dmenu_run -i -b -p 'Launch Application -> ' -nb '#002b36' -nf '#657b83' -sb '#859900' -sf '#eee8d5'
     bindsym shift+D           exec ~/.i3/scripts/winmenu.py
     bindsym       e           layout default
+    bindsym shift+e           exec "i3-nagbar -t warning -m 'Quit X session?' -b '     Yes' 'i3-msg exit'"
     bindsym       f           fullscreen
     bindsym       h           focus left
     bindsym shift+h           move left
@@ -376,7 +395,8 @@ mode "$i3" {
     bindsym shift+r           restart
     bindsym       s           layout stacking
     bindsym shift+space       floating toggle
-    bindsym shift+e           exec "i3-nagbar -t warning -m 'Quit X session?' -b '     Yes' 'i3-msg exit'"
+    bindsym       t           exec urxvt
+    bindsym shift+t           exec xcwd | xargs urxvt -cd
     bindsym       v           split v
     bindsym shift+v           layout splitv
     bindsym       w           layout tabbed
