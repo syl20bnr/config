@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/bin/chromium-browser --app="http://teamlink.ubisoft.org/Stratus"
