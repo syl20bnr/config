@@ -13,14 +13,15 @@
 #           > prog-apps
 #           > music apps
 #
-# The main i3 mode is entered by pressing the $modekeycode key. Press the
+# The main i3 mode is entered by pressing the $modekeycodeL key. Press the
 # same key one more time to exit any mode.
 # It is possile to go up one mode by pressing the $upmodekeycode key.
 
 # global variables
 set $mod Mod1
 # Mod1
-set $modekeycode 64
+set $modekeycodeL 64
+set $modekeycodeR 108
 # ESC
 set $upmodekeycode 9
 
@@ -103,74 +104,109 @@ workspace "20: Various"  output xinerama-1
 #                                  Modes
 # ========================================================================
 
+# Names
+
+set $default default
+set $i3      i3
+set $resize  i3 > resize
+set $apps    i3 > apps
+set $music   i3 > apps > music
+set $prog    i3 > apps > prog
+set $sys     i3 > apps > system
+set $web     i3 > apps > web
+set $mon     i3 > monitor
+
+# Mode: monitor ----------------------------------------------------------
+
+mode "$mon" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmodekeycode   mode $i3
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
+    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       c           exec xrandr --output DVI1 --auto --same-as LVDS1
+    bindsym       l           exec xrandr --output DVI1 --auto --left-of LVDS1
+    bindsym       r           exec xrandr --output DVI1 --auto --right-of LVDS1
+}
+
 # Mode: resize -----------------------------------------------------------
 
-mode "resize" {
+mode "$resize" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode "i3"
-    bindcode $modekeycode     mode "default"
+    bindcode $upmodekeycode   mode $i3
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       h           resize grow   left 2 px or 2 ppt
-    bindsym shift+h           resize shrink left 2 px or 2 ppt
-    bindsym       j           resize grow   down 2 px or 2 ppt
-    bindsym shift+J           resize shrink down 2 px or 2 ppt
-    bindsym       k           resize grow   up 2 px or 2 ppt
-    bindsym shift+k           resize shrink up 2 px or 2 ppt
+    bindsym       h           resize grow    left 2 px or 2 ppt
+    bindsym shift+h           resize shrink  left 2 px or 2 ppt
+    bindsym       j           resize grow    down 2 px or 2 ppt
+    bindsym shift+J           resize shrink  down 2 px or 2 ppt
+    bindsym       k           resize grow      up 2 px or 2 ppt
+    bindsym shift+k           resize shrink    up 2 px or 2 ppt
     bindsym       l           resize grow   right 2 px or 2 ppt
     bindsym shift+l           resize shrink right 2 px or 2 ppt
 }
 
-# Modes: xxx-apps (no pr0n) ----------------------------------------------
+# Modes: apps ------------------------------------------------------------
 
-mode "apps" {
+mode "$apps" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode "i3"
-    bindcode $modekeycode     mode "default"
-    bindsym       m           mode "music-apps"
-    bindsym       p           mode "prog-apps"
-    bindsym       s           mode "sys-apps"
-    bindsym       w           mode "web-apps"
+    bindcode $upmodekeycode   mode $i3
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
+    bindsym       m           mode $music
+    bindsym       p           mode $prog
+    bindsym       s           mode $sys
+    bindsym       w           mode $web
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       4           exec p4v
     bindsym       e           exec emacs
+    bindsym shift+e           exec eclipse
+    bindsym       g           exec github
     bindsym       t           exec urxvt
     bindsym shift+t           exec xcwd | xargs urxvt -cd
     bindsym       y           exec yEd
 }
 
-mode "music-apps" {
+mode "$music" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode "apps"
-    bindcode $modekeycode     mode "default"
+    bindcode $upmodekeycode   mode $apps
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       g           exec grooveshark
     bindsym       p           exec psytrancepower
 }
 
-mode "prog-apps" {
+mode "$prog" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode "apps"
-    bindcode $modekeycode     mode "default"
+    bindcode $upmodekeycode   mode $apps
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       4           exec p4v
     bindsym       e           exec emacs
+    bindsym shift+e           exec eclipse
+    bindsym       g           exec github
     bindsym       y           exec yEd
 }
 
-mode "sys-apps" {
+mode "$sys" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode "apps"
-    bindcode $modekeycode     mode "default"
+    bindcode $upmodekeycode   mode $apps
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       d           exec dconf-editor
     bindsym       t           exec urxvt
     bindsym shift+t           exec xcwd | xargs urxvt -cd
 }
 
-mode "web-apps" {
+mode "$web" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode "apps"
-    bindcode $modekeycode     mode "default"
+    bindcode $upmodekeycode   mode $apps
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       c           exec chromium-browser
     bindsym       f           exec freenode
@@ -179,12 +215,14 @@ mode "web-apps" {
 
 # Main Mode: i3 ----------------------------------------------------------
 
-mode "i3" {
+mode "$i3" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode "default"
-    bindcode $modekeycode     mode "default"
-    bindsym       a           mode "apps"
-    bindsym       r           mode "resize"
+    bindcode $upmodekeycode   mode $default
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
+    bindsym       a           mode $apps
+    bindsym       m           mode $mon
+    bindsym       r           mode $resize
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       1                workspace 1: Terminal
     bindsym shift+1           move workspace 1: Terminal
@@ -257,7 +295,8 @@ mode "i3" {
     bindsym       x           kill
     bindsym       z           exec i3lock -i ~/.img/ubisoft.png
 }
-bindcode $modekeycode mode "i3"
+bindcode $modekeycodeL mode $i3
+bindcode $modekeycodeR mode $i3
 
 # ========================================================================
 #                                    Startup
