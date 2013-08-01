@@ -6,25 +6,25 @@
 # Experimental UX for i3
 # ----------------------
 # All i3 key bindings are encapsulated in a major mode called i3
-# Another layers of key bindings are encapsulated in a hierarchy of
+# Other layers of key bindings are encapsulated in a hierarchy of
 # sub modes, example:
 #
-# i3 > apps > web-apps
-#           > prog-apps
-#           > music apps
+# i3 > apps > web
+#           > prog
+#           > music
 #
-# The main i3 mode is entered by pressing the $modekeycodeL key. Press the
-# same key one more time to exit any mode.
+# The main i3 mode is entered by pressing the $modekeycodeL or $modekeycodeR
+# key. Press the same key or ESC to exit any mode.
 # It is possile to go up one mode by pressing the $upmodekeycode key.
 
 # global variables
 set $mod Mod1
-# Mod1
+# Mod1 use to enter and exit i3 mode
 set $modekeycodeL 64
 set $modekeycodeR 108
-# ESC
+# ESC quits any current mode
 set $quitmode 9
-# Backspace
+# Backspace go up in the hierarchy of modes
 set $upmodekeycode 22
 
 # ========================================================================
