@@ -82,26 +82,47 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # named workspaces
-workspace "1: Terminal"  output xinerama-0
-workspace "2: Terminal"  output xinerama-1
-workspace "3: Code"      output xinerama-0
-workspace "4: Code"      output xinerama-1
-workspace "5: Web"       output xinerama-0
-workspace "6: Web"       output xinerama-1
-workspace "7: SCM"       output xinerama-0
-workspace "8: SCM"       output xinerama-1
-workspace "9: Various"   output xinerama-0
-workspace "10: Various"  output xinerama-1
-workspace "11: Terminal" output xinerama-0
-workspace "12: Terminal" output xinerama-1
-workspace "13: Code"     output xinerama-0
-workspace "14: Code"     output xinerama-1
-workspace "15: Web"      output xinerama-0
-workspace "16: Web"      output xinerama-1
-workspace "17: SCM"      output xinerama-0
-workspace "18: SCM"      output xinerama-1
-workspace "19: Various"  output xinerama-0
-workspace "20: Various"  output xinerama-1
+set $wks01 1: Terminal
+set $wks02 2: Terminal
+set $wks03 3: Code
+set $wks04 4: Code
+set $wks05 5: Web
+set $wks06 6: Web
+set $wks07 7: SCM
+set $wks08 8: SCM
+set $wks09 9: Various
+set $wks10 10: Various
+set $wks11 11: Terminal
+set $wks12 12: Terminal
+set $wks13 13: Code
+set $wks14 14: Code
+set $wks15 15: Web
+set $wks16 16: Web
+set $wks17 17: SCM
+set $wks18 18: SCM
+set $wks19 19: Various
+set $wks20 20: Various
+
+workspace "$wks01" output xinerama-0
+workspace "$wks02" output xinerama-1
+workspace "$wks03" output xinerama-0
+workspace "$wks04" output xinerama-1
+workspace "$wks05" output xinerama-0
+workspace "$wks06" output xinerama-1
+workspace "$wks07" output xinerama-0
+workspace "$wks08" output xinerama-1
+workspace "$wks09" output xinerama-0
+workspace "$wks10" output xinerama-1
+workspace "$wks11" output xinerama-0
+workspace "$wks12" output xinerama-1
+workspace "$wks13" output xinerama-0
+workspace "$wks14" output xinerama-1
+workspace "$wks15" output xinerama-0
+workspace "$wks16" output xinerama-1
+workspace "$wks17" output xinerama-0
+workspace "$wks18" output xinerama-1
+workspace "$wks19" output xinerama-0
+workspace "$wks20" output xinerama-1
 
 # ========================================================================
 #                                  Modes
@@ -111,14 +132,17 @@ workspace "20: Various"  output xinerama-1
 
 set $default default
 set $i3      i3
-set $goto    i3 > goto
-set $resize  i3 > resize
 set $apps    i3 > apps
 set $music   i3 > apps > music
 set $prog    i3 > apps > prog
 set $sys     i3 > apps > system
 set $web     i3 > apps > web
+set $work    i3 > apps > work
+set $goto    i3 > goto
+set $gotom   i3 > goto > music
+set $gotow   i3 > goto > work
 set $mon     i3 > monitor
+set $resize  i3 > resize
 
 # Mode: goto -------------------------------------------------------------
 
@@ -128,9 +152,34 @@ mode "$goto" {
     bindcode $quitmode        mode $default
     bindcode $modekeycodeL    mode $default
     bindcode $modekeycodeR    mode $default
+    bindsym       m           mode $gotom
+    bindsym       w           mode $gotow
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       c           [class=(?i)chromium-browser] focus
-    bindsym       e           [class=(?i)emacs] focus
+    bindsym       c           [instance=chromium-browser] focus
+    bindsym       e           [class=Emacs] focus
+}
+
+mode "$gotom" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmodekeycode   mode $goto
+    bindcode $quitmode        mode $default
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
+    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       m           [instance=www.grooveshark.com] focus
+    bindsym       p           [instance=www.psytrancepower.com] focus
+}
+
+mode "$gotow" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmodekeycode   mode $goto
+    bindcode $quitmode        mode $default
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
+    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       j           [instance=virga-jenkins.ubisoft.org] focus
+    bindsym       p           [instance=virga-portal.ubisoft.org] focus
+    bindsym       w           [instance=teamlink.ubisoft.org__Stratus] focus
 }
 
 # Mode: monitor ----------------------------------------------------------
@@ -174,6 +223,7 @@ mode "$apps" {
     bindcode $quitmode        mode $default
     bindcode $modekeycodeL    mode $default
     bindcode $modekeycodeR    mode $default
+    bindsym       k           mode $work
     bindsym       m           mode $music
     bindsym       p           mode $prog
     bindsym       s           mode $sys
@@ -237,6 +287,18 @@ mode "$web" {
     bindsym shift+g           exec github
 }
 
+mode "$work" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmodekeycode   mode $apps
+    bindcode $quitmode        mode $default
+    bindcode $modekeycodeL    mode $default
+    bindcode $modekeycodeR    mode $default
+    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       j           exec virga-jenkins
+    bindsym       p           exec virga-portal
+    bindsym       w           exec stratus-wiki
+}
+
 # Main Mode: i3 ----------------------------------------------------------
 
 mode "$i3" {
@@ -250,46 +312,46 @@ mode "$i3" {
     bindsym       m           mode $mon
     bindsym       r           mode $resize
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       1                workspace 1: Terminal
-    bindsym shift+1           move workspace 1: Terminal
-    bindsym       2                workspace 2: Terminal
-    bindsym shift+2           move workspace 2: Terminal
-    bindsym       3                workspace 3: Code
-    bindsym shift+3           move workspace 3: Code
-    bindsym       4                workspace 4: Code
-    bindsym shift+4           move workspace 4: Code
-    bindsym       5                workspace 5: Web
-    bindsym shift+5           move workspace 5: Web
-    bindsym       6                workspace 6: Web
-    bindsym shift+6           move workspace 6: Web
-    bindsym       7                workspace 7: SCM
-    bindsym shift+7           move workspace 7: SCM
-    bindsym       8                workspace 8: SCM
-    bindsym shift+8           move workspace 8: SCM
-    bindsym       9                workspace 9: Various
-    bindsym shift+9           move workspace 9: Various
-    bindsym       0                workspace 10: Various
-    bindsym shift+0           move workspace 10: Various
-    bindsym       F1               workspace 11: Terminal
-    bindsym shift+F1          move workspace 11: Terminal
-    bindsym       F2               workspace 12: Terminal
-    bindsym shift+F2          move workspace 12: Terminal
-    bindsym       F3               workspace 13: Code
-    bindsym shift+F3          Move workspace 13: Code
-    bindsym       F4               workspace 14: Code
-    bindsym shift+F4          move workspace 14: Code
-    bindsym       F5               workspace 15: Web
-    bindsym shift+F5          move workspace 15: Web
-    bindsym       F6               workspace 16: Web
-    bindsym shift+F6          move workspace 16: Web
-    bindsym       F7               workspace 17: SCM
-    bindsym shift+F7          move workspace 17: SCM
-    bindsym       F8               workspace 18: SCM
-    bindsym shift+F8          move workspace 18: SCM
-    bindsym       F9               workspace 19: Various
-    bindsym shift+F9          move workspace 19: Various
-    bindsym       F10              workspace 20: Various
-    bindsym shift+F10         move workspace 20: Various
+    bindsym       1                workspace $wks01
+    bindsym shift+1           move workspace $wks01
+    bindsym       2                workspace $wks02
+    bindsym shift+2           move workspace $wks02
+    bindsym       3                workspace $wks03
+    bindsym shift+3           move workspace $wks03
+    bindsym       4                workspace $wks04
+    bindsym shift+4           move workspace $wks04
+    bindsym       5                workspace $wks05
+    bindsym shift+5           move workspace $wks05
+    bindsym       6                workspace $wks06
+    bindsym shift+6           move workspace $wks06
+    bindsym       7                workspace $wks07
+    bindsym shift+7           move workspace $wks07
+    bindsym       8                workspace $wks08
+    bindsym shift+8           move workspace $wks08
+    bindsym       9                workspace $wks09
+    bindsym shift+9           move workspace $wks09
+    bindsym       0                workspace $wks10
+    bindsym shift+0           move workspace $wks10
+    bindsym       F1               workspace $wks11
+    bindsym shift+F1          move workspace $wks11
+    bindsym       F2               workspace $wks12
+    bindsym shift+F2          move workspace $wks12
+    bindsym       F3               workspace $wks13
+    bindsym shift+F3          Move workspace $wks13
+    bindsym       F4               workspace $wks14
+    bindsym shift+F4          move workspace $wks14
+    bindsym       F5               workspace $wks15
+    bindsym shift+F5          move workspace $wks15
+    bindsym       F6               workspace $wks16
+    bindsym shift+F6          move workspace $wks16
+    bindsym       F7               workspace $wks17
+    bindsym shift+F7          move workspace $wks17
+    bindsym       F8               workspace $wks18
+    bindsym shift+F8          move workspace $wks18
+    bindsym       F9               workspace $wks19
+    bindsym shift+F9          move workspace $wks19
+    bindsym       F10              workspace $wks20
+    bindsym shift+F10         move workspace $wks20
     bindsym       b           split h
     bindsym shift+b           layout splith
     bindsym shift+c           reload
