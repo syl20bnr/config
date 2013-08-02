@@ -3,6 +3,7 @@ LN=/usr/local/bin/
 
 DEFAULT=freenode       \
         github         \
+        gmail          \
         googlegroups   \
         grooveshark    \
         psytrancepower
