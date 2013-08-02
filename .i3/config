@@ -13,19 +13,20 @@
 #           > prog
 #           > music
 #
-# The main i3 mode is entered by pressing the $modekeycodeL or $modekeycodeR
+# The main i3 mode is entered by pressing the $exitmodeL or $exitmodeR
 # key. Press the same key or ESC to exit any mode.
-# It is possile to go up one mode by pressing the $upmodekeycode key.
+# It is possile to go up one mode by pressing the $upmode     key.
 
-# global variables
 set $mod Mod1
-# Mod1 use to enter and exit i3 mode
-set $modekeycodeL 64
-set $modekeycodeR 108
+# Key used to enter i3 mode
+set $entermode Mod1+space
+# Key used to exit i3 mode
+set $exitmodeL 64
+set $exitmodeR 108
 # ESC quits any current mode
 set $quitmode 9
 # Backspace go up in the hierarchy of modes
-set $upmodekeycode 22
+set $upmode 22
 
 # ========================================================================
 #                             System Preferences
@@ -52,7 +53,7 @@ bar {
     status_command    i3status+
     position          top
     mode              hide
-    modifier          $mod
+#    modifier          $mod
     workspace_buttons yes
     tray_output       primary
 
@@ -204,10 +205,10 @@ set $resize      i3 > resize
 
 mode "$goto" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $i3
+    bindcode $upmode          mode $i3
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     bindsym       k           mode $gotok
     bindsym       m           mode $gotom
     bindsym       p           mode $gotop
@@ -216,10 +217,10 @@ mode "$goto" {
 
 mode "$gotok" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $goto
+    bindcode $upmode          mode $goto
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       4           [instance=p4v.bin] focus
     bindsym       g           [instance=virga-gitlab.ubisoft.org] focus
@@ -232,10 +233,10 @@ mode "$gotok" {
 
 mode "$gotom" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $goto
+    bindcode $upmode          mode $goto
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       g           [instance=www.grooveshark.com] focus
     bindsym       p           [instance=www.psytrancepower.com] focus
@@ -243,10 +244,10 @@ mode "$gotom" {
 
 mode "$gotop" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $goto
+    bindcode $upmode          mode $goto
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       e           [class=Emacs] focus
     bindsym shift+g           [instance=github.com] focus
@@ -254,10 +255,10 @@ mode "$gotop" {
 
 mode "$gotow" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $goto
+    bindcode $upmode          mode $goto
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       c           [instance=chromium-browser] focus
     bindsym       f           [class=Firefox] focus
@@ -268,10 +269,10 @@ mode "$gotow" {
 
 mode "$mon" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $i3
+    bindcode $upmode          mode $i3
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       c           exec xrandr --output DVI1 --auto --same-as LVDS1
     bindsym       l           exec xrandr --output DVI1 --auto --left-of LVDS1
@@ -282,10 +283,10 @@ mode "$mon" {
 
 mode "$resize" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $i3
+    bindcode $upmode          mode $i3
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       h           resize grow    left 2 px or 2 ppt
     bindsym shift+h           resize shrink  left 2 px or 2 ppt
@@ -301,10 +302,10 @@ mode "$resize" {
 
 mode "$apps" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $i3
+    bindcode $upmode          mode $i3
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     bindsym       k           mode $work
     bindsym       m           mode $music
     bindsym       p           mode $prog
@@ -314,10 +315,10 @@ mode "$apps" {
 
 mode "$music" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $apps
+    bindcode $upmode          mode $apps
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       g           exec grooveshark
     bindsym       p           exec psytrancepower
@@ -325,10 +326,10 @@ mode "$music" {
 
 mode "$prog" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $apps
+    bindcode $upmode          mode $apps
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       e           exec emacs
     bindsym shift+e           exec eclipse
@@ -340,20 +341,20 @@ mode "$prog" {
 
 mode "$sys" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $apps
+    bindcode $upmode          mode $apps
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       d           exec dconf-editor
 }
 
 mode "$web" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $apps
+    bindcode $upmode          mode $apps
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       c           exec chromium-browser
     bindsym       f           exec firefox
@@ -362,10 +363,10 @@ mode "$web" {
 
 mode "$work" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $apps
+    bindcode $upmode          mode $apps
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       4           exec p4v
     bindsym       g           exec virga-gitlab
@@ -380,10 +381,10 @@ mode "$work" {
 
 mode "$wkspaces" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $i3
+    bindcode $upmode          mode $i3
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       0                workspace $wks00
     bindsym shift+0           move workspace $wks00
@@ -487,10 +488,10 @@ mode "$wkspaces" {
 
 mode "$i3" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmodekeycode   mode $default
+    bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
-    bindcode $modekeycodeL    mode $default
-    bindcode $modekeycodeR    mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
     bindsym       a           mode $apps
     bindsym       g           mode $goto
     bindsym       m           mode $mon
@@ -528,10 +529,9 @@ mode "$i3" {
     bindsym       v           split v
     bindsym shift+v           layout splitv
     bindsym       x           kill
-    bindsym       z           exec i3lock -i ~/.img/ubisoft.png
+    bindsym       z           exec i3lock -i ~/.img/ubisoft.png -c 000000
 }
-bindcode $modekeycodeL mode $i3
-bindcode $modekeycodeR mode $i3
+bindsym $entermode  mode $i3
 
 # ========================================================================
 #                                    Startup
