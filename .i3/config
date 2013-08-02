@@ -43,7 +43,7 @@ floating_modifier $mod
 
 # Special window properties
 for_window [class="Emacs"] border none
-for_window [class="Chromium"] border 1pixel
+for_window [instance=chromium-browser] border 1pixel
 for_window [title="yEd"] border 1pixel
 for_window [title="urxvt"] border 1pixel
 
@@ -51,7 +51,7 @@ for_window [title="urxvt"] border 1pixel
 bar {
     id                main
     status_command    i3status+
-    position          top
+    position          bottom
     mode              hide
 #    modifier          $mod
     workspace_buttons yes
@@ -199,6 +199,7 @@ set $gotom       i3 > goto > music
 set $gotop       i3 > goto > prog
 set $gotow       i3 > goto > web
 set $mon         i3 > monitor
+set $monk        i3 > monitor > work
 set $resize      i3 > resize
 
 # Mode: goto -------------------------------------------------------------
@@ -273,10 +274,23 @@ mode "$mon" {
     bindcode $quitmode        mode $default
     bindcode $exitmodeL       mode $default
     bindcode $exitmodeR       mode $default
+    bindsym       k           mode $monk
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       c           exec xrandr --output DVI1 --auto --same-as LVDS1
+    bindsym       d           exec xrandr --output DVI1 --auto --right-of LVDS1
     bindsym       l           exec xrandr --output DVI1 --auto --left-of LVDS1
     bindsym       r           exec xrandr --output DVI1 --auto --right-of LVDS1
+}
+
+mode "$monk" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmode          mode $mon
+    bindcode $quitmode        mode $default
+    bindcode $exitmodeL       mode $default
+    bindcode $exitmodeR       mode $default
+    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       c           exec xrandr -s 0
+    bindsym       d           exec xrandr -s 1
 }
 
 # Mode: resize -----------------------------------------------------------
@@ -446,6 +460,8 @@ mode "$wkspaces" {
     bindsym shift+s           move workspace $wks28
     bindsym       t                workspace $wks29
     bindsym shift+t           move workspace $wks29
+    bindsym       Tab         workspace back_and_forth
+    bindsym shift+Tab         move container to workspace back_and_forth
     bindsym       u                workspace $wks30
     bindsym shift+u           move workspace $wks30
     bindsym       v                workspace $wks31
@@ -517,8 +533,6 @@ mode "$i3" {
     bindsym shift+minus       move scratchpad
     bindsym       minus       scratchpad show
     bindsym       n           layout tabbed
-    bindsym       p           workspace back_and_forth
-    bindsym shift+p           move container to workspace back_and_forth
     bindsym       q           focus parent
     bindsym shift+q           focus child
     bindsym shift+r           restart
@@ -526,6 +540,8 @@ mode "$i3" {
     bindsym shift+space       floating toggle
     bindsym       t           exec urxvt
     bindsym shift+t           exec xcwd | xargs urxvt -cd
+    bindsym       Tab         workspace back_and_forth
+    bindsym shift+Tab         move container to workspace back_and_forth
     bindsym       v           split v
     bindsym shift+v           layout splitv
     bindsym       x           kill
