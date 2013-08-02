@@ -51,8 +51,8 @@ bar {
     id                main
     status_command    i3status+
     position          bottom
-    mode              hide
-#    modifier          $mod
+    mode              dock
+#   modifier          $mod
     workspace_buttons yes
     tray_output       primary
 
