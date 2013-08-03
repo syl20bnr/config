@@ -1,0 +1,3 @@
+#!/bin/sh
+path=`echo ~/.i3/bin`
+exe=`dmenu_path | $path/dmenu_early -i -b -h 18 -p "Launch Application -> " -nb "#002b36" -nf "#657b83" -sb "#859900" -sf "#eee8d5" ${1+"$@"}` && exec $exe
