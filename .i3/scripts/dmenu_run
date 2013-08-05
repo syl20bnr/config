@@ -1,3 +1,30 @@
-#!/bin/sh
-path=`echo ~/.i3/bin`
-exe=`dmenu_path | $path/dmenu_early -i -b -h 18 -p "Launch Application -> " -nb "#002b36" -nf "#657b83" -sb "#859900" -sf "#eee8d5" ${1+"$@"}` && exec $exe
+#!/usr/bin/env python
+
+# author: syl20bnr (2013)
+# goal: Launch an application on the specified monitor.
+
+import argparse
+
+from feeders import dmenu_path as feeder
+from i3_actions import launch_app
+
+
+PARSER = argparse.ArgumentParser(prog='dmenu_run')
+PARSER.add_argument('-m', '--monitor',
+                    type=int,
+                    choices=[0, 1],
+                    default=-1,
+                    help='Monitor index, 0 for main and 1 for second.')
+PARSER.add_argument('-f', '--free',
+                    action='store_true',
+                    default=False,
+                    help=('If true the application is launched on a free '
+                          'workspace.'))
+
+
+if __name__ == '__main__':
+    args = PARSER.parse_args()
+    mon = 'all'
+    if args.monitor != -1:
+        mon = 'xinerama-{0}'.format(args.monitor)
+    launch_app(feeder, mon, args.free)

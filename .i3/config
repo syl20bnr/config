@@ -2,24 +2,10 @@
 #
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-#
-# Experimental UX for i3
-# ----------------------
-# All i3 key bindings are encapsulated in a major mode called i3
-# Other layers of key bindings are encapsulated in a hierarchy of
-# sub modes, example:
-#
-# i3 > apps > web
-#           > prog
-#           > music
-#
-# The main i3 mode is entered by pressing the Mod1+space keys.
-# Press Mod1 to exit any mode.
-# It is possile to go up one mode by pressing the backspace key.
 
 set $mod Mod1
 # Key used to enter i3 mode
-set $entermode Mod1+space
+set $entermode Mod1+i
 # quit any current mode
 set $quitmode 64
 set $quitmode2 108
@@ -54,8 +40,8 @@ bar {
     id                main
     status_command    i3status+
     position          bottom
-    mode              dock
-#   modifier          $mod
+    mode              hide
+    modifier          $mod
     workspace_buttons yes
     tray_output       primary
 
@@ -85,11 +71,29 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 #                              Key Bindings
 # ========================================================================
 
-bindsym $mod+d          exec $scripts/dmenu_run
-bindsym $mod+w          exec $scripts/dmenu_jump_wks
-bindsym $mod+shift+w    exec $scripts/dmenu_send_win
-bindsym $mod+control+w  exec $scripts/dmenu_send_wks
-bindsym $mod+x          kill
+bindsym $mod+semicolon            exec i3-input -P "i3 command -> "
+bindsym $mod+d                    mode $default, exec $scripts/dmenu_run
+bindsym $mod+shift+d              mode $default, exec $scripts/dmenu_run --free
+bindsym $mod+f                    fullscreen
+bindsym $mod+h                    focus left
+bindsym $mod+shift+h              move left
+bindsym $mod+j                    focus  down
+bindsym $mod+shift+j              move down
+bindsym $mod+k                    focus up
+bindsym $mod+shift+k              move up
+bindsym $mod+l                    focus right
+bindsym $mod+shift+l              move right
+bindsym $mod+o                    mode $default, exec $scripts/dmenu_send_wks_to_output
+bindsym $mod+p                    mode $default, exec $scripts/dmenu_jump_cur_used_workspace
+bindsym $mod+q                    focus parent
+bindsym $mod+shift+q              focus child
+bindsym $mod+s                    mode $default, exec $scripts/dmenu_send_win_to_workspace
+bindsym $mod+t                    mode $default, exec $scripts/dmenu_jump_win -i urxvt
+bindsym $mod+shift+space          floating toggle
+bindsym $mod+w                    mode $default, exec $scripts/dmenu_jump_win
+bindsym $mod+x                    kill
+bindsym $mod+y                    exec $scripts/dmenu_layout
+bindsym $mod+z                    exec i3lock -i ~/.img/ubisoft.png -c 000000
 
 # ========================================================================
 #                                  Modes
@@ -99,82 +103,45 @@ bindsym $mod+x          kill
 
 set $default     default
 set $i3          i3
-set $mon         i3 > monitor
-set $monk        i3 > monitor > work
+set $mon         i3 > monitor config
+set $monk        i3 > monitor config > work
 set $resize      i3 > resize
-set $apps        apps
-set $music       apps > music
-set $prog        apps > prog
-set $sys         apps > system
-set $web         apps > web
-set $work        apps > work
-set $goto        goto
-set $gotob       goto > web
-set $gotok       goto > work
-set $gotom       goto > music
-set $gotop       goto > prog
+set $outputA     monitor 1
+set $outputB     monitor 2
 
-# Mode: goto -------------------------------------------------------------
+# Mode: output -----------------------------------------------------------
 
-mode "$goto" {
+mode "$outputA" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
-    bindsym       b           mode $gotob
-    bindsym       k           mode $gotok
-    bindsym       m           mode $gotom
-    bindsym       p           mode $gotop
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       t           mode $default, exec $scripts/dmenu_jump_term
-    bindsym       w           mode $default, exec $scripts/dmenu_jump_win
-}
-bindsym $mod+g mode $goto
-
-mode "$gotob" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $goto
+    bindsym       d           mode $default, exec $scripts/dmenu_run -m 0
+    bindsym shift+d           mode $default, exec $scripts/dmenu_run -m 0 --free
+    bindsym       p           mode $default, exec $scripts/dmenu_jump_cur_used_workspace -m 0
+    bindsym       s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace -m 0
+    bindsym shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace -m 0
+    bindsym       t           mode $default, exec $scripts/dmenu_jump_win -i urxvt -m 0
+    bindsym       w           mode $default, exec $scripts/dmenu_jump_win -m 0
+}
+bindsym $mod+1 mode $outputA
+
+mode "$outputB" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       c           [instance=chromium-browser] focus
-    bindsym       f           [class=Firefox] focus
-    bindsym       m           [instance=mail.google.com] focus
-}
-
-mode "$gotok" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $goto
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       4           [instance=p4v.bin] focus
-    bindsym       g           [instance=virga-gitlab.ubisoft.org] focus
-    bindsym       j           [instance=virga-jenkins.ubisoft.org] focus
-    bindsym       p           [instance=virga-portal.ubisoft.org] focus
-    bindsym       q           [instance=virga-quickbuild.ubisoft.org] focus
-    bindsym       r           [instance=virga-rb.ubisoft.org] focus
-    bindsym       w           [instance=teamlink.ubisoft.org__Stratus] focus
+    bindsym       d           mode $default, exec $scripts/dmenu_run -m 1
+    bindsym shift+d           mode $default, exec $scripts/dmenu_run -m 1 --free
+    bindsym       p           mode $default, exec $scripts/dmenu_jump_cur_used_workspace -m 1
+    bindsym       s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace -m 1
+    bindsym shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace -m 1
+    bindsym       t           mode $default, exec $scripts/dmenu_jump_win -i urxvt -m 1
+    bindsym       w           mode $default, exec $scripts/dmenu_jump_win -m 1
 }
-
-mode "$gotom" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $goto
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       g           [instance=www.grooveshark.com] focus
-    bindsym       p           [instance=www.psytrancepower.com] focus
-}
-
-mode "$gotop" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $goto
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       e           [class=Emacs] focus
-    bindsym shift+g           [instance=github.com] focus
-}
+bindsym $mod+2 mode $outputB
 
 # Mode: monitor ----------------------------------------------------------
 
@@ -219,83 +186,7 @@ mode "$resize" {
     bindsym shift+l           resize shrink right 2 px or 2 ppt
 }
 
-# Modes: apps ------------------------------------------------------------
-
-mode "$apps" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    bindsym       k           mode $work
-    bindsym       m           mode $music
-    bindsym       p           mode $prog
-    bindsym       s           mode $sys
-    bindsym       w           mode $web
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       t           exec urxvt
-    bindsym shift+t           exec xcwd | xargs urxvt -cd
-}
-bindsym $mod+a mode $apps
-
-mode "$music" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $apps
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       g           exec grooveshark
-    bindsym       p           exec psytrancepower
-}
-
-mode "$prog" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $apps
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       e           exec emacs
-    bindsym shift+e           exec eclipse
-    bindsym       f           exec freenode
-    bindsym       g           exec googlegroups
-    bindsym shift+g           exec github
-    bindsym       y           exec yEd
-}
-
-mode "$sys" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $apps
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       d           exec dconf-editor
-}
-
-mode "$web" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $apps
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       c           exec chromium-browser
-    bindsym       f           exec firefox
-    bindsym       g           exec gmail
-}
-
-mode "$work" {
-    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $apps
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       4           exec p4v
-    bindsym       g           exec virga-gitlab
-    bindsym       j           exec virga-jenkins
-    bindsym       p           exec virga-portal
-    bindsym       q           exec virga-quickbuild
-    bindsym       r           exec virga-rb
-    bindsym       w           exec stratus-wiki
-}
-
-# Main Mode: i3 ----------------------------------------------------------
+# Mode: i3 ---------------------------------------------------------------
 
 mode "$i3" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
@@ -305,36 +196,6 @@ mode "$i3" {
     bindsym       m           mode $mon
     bindsym       r           mode $resize
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       b           split h
-    bindsym shift+b           layout splith
-    bindsym       c           [instance="scratchpad_urxvt"] scratchpad show, move position 0px 0px
-    bindsym shift+c           exec xcwd | xargs urxvt -name 'scratchpad_urxvt' -g 128x40 -cd
-    bindsym       d           exec dmenu_run -i -b -p 'Launch Application -> ' -nb '#002b36' -nf '#657b83' -sb '#859900' -sf '#eee8d5'
-    bindsym shift+D           exec ~/.i3/scripts/winmenu.py
-    bindsym       e           layout default
-    bindsym shift+e           exec "i3-nagbar -t warning -m 'Quit X session?' -b '     Yes' 'i3-msg exit'"
-    bindsym       f           fullscreen
-    bindsym       h           focus left
-    bindsym shift+h           move left
-    bindsym       j           focus  down
-    bindsym shift+j           move down
-    bindsym       k           focus up
-    bindsym shift+k           move up
-    bindsym       l           focus right
-    bindsym shift+l           move right
-    bindsym shift+minus       move scratchpad
-    bindsym       minus       scratchpad show
-    bindsym       n           layout tabbed
-    bindsym       q           focus parent
-    bindsym shift+q           focus child
-    bindsym       r           reload
-    bindsym shift+r           restart
-    bindsym       s           layout stacking
-    bindsym shift+space       floating toggle
-    bindsym       v           split v
-    bindsym shift+v           layout splitv
-    bindsym       x           kill
-    bindsym       z           exec i3lock -i ~/.img/ubisoft.png -c 000000
 }
 bindsym $entermode mode $i3
 

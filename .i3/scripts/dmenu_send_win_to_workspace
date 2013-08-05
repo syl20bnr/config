@@ -6,5 +6,6 @@
 from feeders import workspaces as feeder
 from i3_actions import send_window_to_workspace
 
+
 if __name__ == '__main__':
     send_window_to_workspace(feeder)

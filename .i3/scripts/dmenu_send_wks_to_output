@@ -6,5 +6,6 @@
 from feeders import outputs as feeder
 from i3_actions import send_workspace_to_output
 
+
 if __name__ == '__main__':
     send_workspace_to_output(feeder)

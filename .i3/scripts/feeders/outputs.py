@@ -10,7 +10,7 @@ def get_prompt():
     return "Send to output ->"
 
 
-def get_outputs():
+def feed():
     res = []
     outputs = i3.msg('get_outputs')
     for o in outputs:
@@ -18,4 +18,4 @@ def get_outputs():
     return res
 
 if __name__ == '__main__':
-    print('\n'.join(get_outputs()))
+    print('\n'.join(feed()))
