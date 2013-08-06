@@ -13,8 +13,9 @@ import workspaces
 def get_prompt(verb, output):
     prompt = "workspace"
     if output != 'all':
-        prompt += " on {0}".format(output)
-    return "{0} currently used {1} ->".format(verb, prompt)
+        m = common.get_natural_monitor_value(output)
+        prompt += " on {0}".format(m)
+    return "{0} current {1} ->".format(verb, prompt)
 
 
 def get_cur_workspaces(output):
@@ -24,7 +25,8 @@ def get_cur_workspaces(output):
     all_ws = workspaces.get_workspaces_no_prefix()
     used = []
     ws_tree = i3.msg('get_workspaces')
-    for o in outputs.feed():
+    outs = outputs.get_outputs_dictionary()
+    for o in outs.itervalues():
         if output == 'all' or output == o:
             for ws in all_ws:
                 if i3.filter(tree=ws_tree, output=o, name=ws):

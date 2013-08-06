@@ -86,7 +86,7 @@ def launch_app(feeder, output='all', free=False):
     from feeders import cur_workspace
     from feeders.free_workspaces import get_free_workspaces
     from feeders.cur_output import get_current_output
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt(),
+    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt(free, output),
                       height=DMENU_HEIGHT)
     reply = proc.communicate(feeder.feed().encode('utf-8'))[0]
     if reply:
@@ -125,8 +125,7 @@ def jump_to_window(feeder, inst, output='all'):
     size = max([0, min([DMENU_MAX_ROW, len(windows)])])
     proc = dmenu.call('/usr/bin/dmenu',
                       feeder.get_prompt(inst, output), nl=size)
-    reply = proc.communicate(
-        '\n'.join(windows).encode('utf-8'))[0]
+    reply = proc.communicate('\n'.join(windows).encode('utf-8'))[0]
     if reply:
         win = reply.decode('utf-8').rstrip()
         action = Action()
@@ -152,8 +151,7 @@ def jump_to_currently_used_workspace(feeder, output='all'):
     '''
     proc = dmenu.call(DMENU_EARLY, feeder.get_prompt("Go to", output),
                       height=DMENU_HEIGHT, ret_early=True)
-    reply = proc.communicate(
-        '\n'.join(feeder.feed(output)).encode('utf-8'))[0]
+    reply = proc.communicate('\n'.join(feeder.feed(output)).encode('utf-8'))[0]
     if reply:
         action = Action()
         action.add_action(Action.jump_to_workspace, (reply))
@@ -168,11 +166,12 @@ def send_workspace_to_output(feeder):
         return
     proc = dmenu.call(DMENU_EARLY, feeder.get_prompt(),
                       height=DMENU_HEIGHT, ret_early=True)
+    outputs = feeder.get_outputs_dictionary()
     reply = proc.communicate(
-        '\n'.join(feeder.feed()).encode('utf-8'))[0]
+        '\n'.join(sorted(outputs.keys())).encode('utf-8'))[0]
     if reply:
         action = Action()
-        action.add_action(Action.send_workspace_to_output, (reply))
+        action.add_action(Action.send_workspace_to_output, (outputs[reply]))
         action.process()
 
 
@@ -180,8 +179,7 @@ def send_window_to_workspace(feeder):
     ''' Send the current window to the selected workspace. '''
     proc = dmenu.call(DMENU_EARLY, feeder.get_prompt("Send to"),
                       height=DMENU_HEIGHT, ret_early=True)
-    reply = proc.communicate(
-        '\n'.join(feeder.feed()).encode('utf-8'))[0]
+    reply = proc.communicate('\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
         action = Action()
         action.add_action(Action.send_window_to_workspace, (reply))
@@ -206,8 +204,7 @@ def send_window_to_used_workspace(feeder, output):
     ''' Send the current window to a used workspace on the given output. '''
     proc = dmenu.call(DMENU_EARLY, feeder.get_prompt("Send to", output),
                       height=DMENU_HEIGHT, ret_early=True)
-    reply = proc.communicate(
-        '\n'.join(feeder.feed(output)).encode('utf-8'))[0]
+    reply = proc.communicate('\n'.join(feeder.feed(output)).encode('utf-8'))[0]
     if reply:
         action = Action()
         action.add_action(Action.send_window_to_workspace, (reply))
@@ -218,8 +215,7 @@ def send_window_to_used_workspace(feeder, output):
 def execute_layout_cmd(feeder):
     ''' Execute: i3-msg layout *user_choice* '''
     proc = dmenu.call(DMENU_EARLY, feeder.get_prompt(), height=DMENU_HEIGHT)
-    reply = proc.communicate(
-        '\n'.join(feeder.feed()).encode('utf-8'))[0]
+    reply = proc.communicate('\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
         action = Action()
         action.add_action(Action.layout_cmd, (reply))

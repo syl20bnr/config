@@ -5,16 +5,14 @@
 
 import argparse
 
+import common
 from feeders import dmenu_path as feeder
 from i3_actions import launch_app
 
 
 PARSER = argparse.ArgumentParser(prog='dmenu_run')
-PARSER.add_argument('-m', '--monitor',
-                    type=int,
-                    choices=[0, 1],
-                    default=-1,
-                    help='Monitor index, 0 for main and 1 for second.')
+common.add_monitor_param(PARSER)
+
 PARSER.add_argument('-f', '--free',
                     action='store_true',
                     default=False,
@@ -24,7 +22,5 @@ PARSER.add_argument('-f', '--free',
 
 if __name__ == '__main__':
     args = PARSER.parse_args()
-    mon = 'all'
-    if args.monitor != -1:
-        mon = 'xinerama-{0}'.format(args.monitor)
+    mon = common.get_monitor_value(args)
     launch_app(feeder, mon, args.free)

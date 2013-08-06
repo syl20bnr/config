@@ -18,7 +18,8 @@ def get_prompt(win_inst=None, output='all'):
     if win_inst:
         prompt = win_inst
     if output != 'all':
-        prompt += " on {0}".format(output)
+        m = common.get_natural_monitor_value(output)
+        prompt += " on {0}".format(m)
     return "Go to {0} ->".format(prompt)
 
 

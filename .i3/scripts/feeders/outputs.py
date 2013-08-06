@@ -10,12 +10,21 @@ def get_prompt():
     return "Send to output ->"
 
 
-def feed():
-    res = []
+def get_outputs_dictionary():
+    ''' Returns a dictionary where key is a natural output name
+    like "monitor 1" and value is the low level name like
+    "xinerama-0"'''
+    res = {}
     outputs = i3.msg('get_outputs')
-    for o in outputs:
-        res.append(o['name'])
+    for i, o in enumerate(outputs):
+        res['monitor {0}'.format(i+1)] = o['name']
     return res
+
+
+def feed():
+    outputs = get_outputs_dictionary()
+    return sorted(outputs.keys())
+
 
 if __name__ == '__main__':
     print('\n'.join(feed()))

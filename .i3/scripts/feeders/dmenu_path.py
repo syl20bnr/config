@@ -5,12 +5,19 @@
 
 from subprocess import Popen, PIPE
 
+import common
 
-def get_prompt(win_inst=None, output='all'):
-    prompt = 'Launch application'
-    if output != 'all':
-        prompt += " on {0}".format(output)
-    return "{0} ->".format(prompt)
+
+def get_prompt(free, output='all'):
+    prompt = 'Start application'
+    if free:
+        prompt += " in a new workspace"
+    if output == 'all':
+        prompt += ' here'
+    else:
+        mon = common.get_natural_monitor_value(output)
+        prompt += ' on {0}'.format(mon)
+    return '{0} ->'.format(prompt)
 
 
 def feed(win_inst=None, output='all'):
