@@ -37,7 +37,6 @@ def feed(win_inst=None, output='all'):
         instances = {}
         # adds windows and their ids to the clients dictionary
         for window in windows:
-            print window
             name = window['name']
             inst = _get_X_window_instance(window['window'])
             if inst:
@@ -47,7 +46,9 @@ def feed(win_inst=None, output='all'):
                     tree = i3.filter(name=output)
                     eligible = i3.filter(tree, name=name)
                 if eligible:
-                    win = '[%s] %s' % (inst, window['name'])
+                    win = window['name']
+                    if not win_inst:
+                        win = u'[{0}] {1}'.format(inst, win)
                     # appends an instance number if other instances are present
                     if win in instances:
                         instances[win] += 1
@@ -67,7 +68,6 @@ def _get_X_window_instance(id):
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
     out = p.stdout.read()
     if out:
-        print out
         m = re.match(r'^.*=\s"(.*?)"', out)
         if m:
             inst = m.group(1)
