@@ -23,4 +23,4 @@ PARSER.add_argument('-f', '--free',
 if __name__ == '__main__':
     args = PARSER.parse_args()
     mon = common.get_monitor_value(args)
-    launch_app(feeder, mon, args.free)
+    launch_app(feeder, output=mon, free=args.free)
