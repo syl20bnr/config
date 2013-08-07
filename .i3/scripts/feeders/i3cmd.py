@@ -21,9 +21,7 @@ def feed(prefix):
                 'tabbed',
                 'toggle split']
     else:
-        return ['reload',
-                'restart',
-                'exit']
+        return ['reload', 'restart']
 
 
 if __name__ == '__main__':

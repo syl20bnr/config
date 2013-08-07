@@ -6,10 +6,7 @@
 from subprocess import Popen
 
 import dmenu
-
-DMENU_MAX_ROW = 32
-DMENU_HEIGHT = 18
-DMENU_FONT = 'DejaVu Sans Mono-10:normal'
+from constants import DMENU_MAX_ROW, DMENU_FONT, DMENU_HEIGHT
 
 
 class Action(object):
@@ -233,7 +230,7 @@ def execute_cmd(feeder, prefix):
     proc = dmenu.call(p=feeder.get_prompt(prefix),
                       f=DMENU_FONT,
                       h=DMENU_HEIGHT,
-                      sb='#dc322f')
+                      sb='#cb4b16')
     reply = proc.communicate('\n'.join(feeder.feed(prefix)).encode('utf-8'))[0]
     if reply:
         reply = reply.decode('utf-8')

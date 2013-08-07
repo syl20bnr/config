@@ -8,13 +8,6 @@
 # ========================================================================
 
 set $mod       Mod1
-# Key used to enter i3 mode
-set $entermode Mod1+i
-# quit any current mode
-set $quitmode  64
-set $quitmode2 108
-# Backspace go up in the hierarchy of modes
-set $upmode    22
 # terminal
 set $term      urxvt
 # navigation keys
@@ -22,6 +15,12 @@ set $left      h
 set $right     l
 set $up        k
 set $down      j
+# Mode key bindings
+# quit any current mode
+set $quitmode  64
+set $quitmode2 108
+# Backspace go up in the hierarchy of modes
+set $upmode    22
 
 # paths
 set $scripts ~/.i3/scripts
@@ -44,6 +43,7 @@ for_window [class="Emacs"] border none
 for_window [instance=chromium-browser] border 1pixel
 for_window [title="yEd"] border 1pixel
 for_window [title="$term"] border 1pixel
+for_window [class="I3-exit"] floating enable; border 1pixel
 
 # i3 bar
 bar {
@@ -88,12 +88,12 @@ bindsym $mod+semicolon            exec i3-input -P "i3 command -> "
 bindsym $mod+d                    exec $scripts/dmenu_run
 bindsym $mod+shift+d              exec $scripts/dmenu_run --free
 bindsym $mod+e                    exec $scripts/dmenu_send_wks_to_output
+bindsym $mod+Escape               exec $scripts/dmenu_logout
 bindsym $mod+f                    exec $scripts/dmenu_jump_win -i $term
-# bindsym $mod+shift+f              exec urxvt
 bindsym $mod+g                    mode $default, exec $scripts/dmenu_jump_win
+bindsym $mod+i                    exec $scripts/dmenu_i3_cmd
 bindsym $mod+p                    focus parent
 bindsym $mod+shift+p              focus child
-bindsym $mod+q                    exec $scripts/dmenu_i3_cmd
 bindsym $mod+r                    workspace back_and_forth
 bindsym $mod+Return               fullscreen
 bindsym $mod+s                    exec $scripts/dmenu_send_win_to_workspace
@@ -112,11 +112,11 @@ bindsym $mod+z                    exec i3lock -i ~/.img/ubisoft.png -c 000000
 # Names
 
 set $default     default
-set $i3          i3
-set $mon         i3 > monitor config.
-set $monk        i3 > monitor config. > @work
-set $resize      i3 > resize
-set $multimedia  multimedia
+set $modes       Options
+set $mon         Options > Outputs
+set $monk        Options > Outputs > @work
+set $multimedia  Options > Multimedia
+set $resize      Options > Resize
 set $outputA     monitor 1
 set $outputB     monitor 2
 
@@ -167,8 +167,8 @@ bindsym $mod+2 mode $outputB
 set $updatebar killall -USR1 i3status 
 mode "$multimedia" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindcode $upmode          mode $modes
     bindsym  Escape           mode $default
-    bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
@@ -176,17 +176,16 @@ mode "$multimedia" {
     bindsym       $down       exec "amixer -q set Master 2dB- unmute; $updatebar"
     bindsym       m           exec "amixer -q set Master toggle; $updatebar"  
 }
-bindsym $mod+m mode $multimedia
 
 # Mode: monitor ----------------------------------------------------------
 
 mode "$mon" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $i3
+    bindcode $upmode          mode $modes
     bindsym  Escape           mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
-    bindsym       k           mode $monk
+    bindsym       w           mode $monk
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
     bindsym       c           exec xrandr --output DVI1 --auto --same-as LVDS1
     bindsym       d           exec xrandr --output DVI1 --auto --right-of LVDS1
@@ -209,7 +208,7 @@ mode "$monk" {
 
 mode "$resize" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $i3
+    bindcode $upmode          mode $modes
     bindsym  Escape           mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
@@ -224,19 +223,20 @@ mode "$resize" {
     bindsym shift+$right      resize shrink right 2 px or 2 ppt
 }
 
-# Mode: i3 ---------------------------------------------------------------
+# Mode: Main Modes for all secondary modes --------------------------------
 
-mode "$i3" {
+mode "$modes" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
     bindsym  Escape           mode $default
     bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
-    bindsym       m           mode $mon
+    bindsym       m           mode $multimedia
+    bindsym       o           mode $mon
     bindsym       r           mode $resize
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
 }
-bindsym $entermode mode $i3
+bindsym $mod+o mode $modes
 
 # ========================================================================
 #                                    Startup
