@@ -59,8 +59,9 @@ class Action(object):
         else:
             return "move workspace {0}".format(workspace)
 
-    def layout_cmd(self, cmd):
-        return "layout {0}".format(cmd)
+    def cmd(self, cmd):
+        # wonderful method :-)
+        return cmd
 
 
 # ----------------------------------------------------------------------------
@@ -227,15 +228,18 @@ def send_window_to_used_workspace(feeder, output):
         action.process()
 
 
-def execute_layout_cmd(feeder):
-    ''' Execute: i3-msg layout *user_choice* '''
-    proc = dmenu.call(p=feeder.get_prompt(),
+def execute_cmd(feeder, prefix):
+    ''' Execute: i3-msg prefix *user_choice* '''
+    proc = dmenu.call(p=feeder.get_prompt(prefix),
                       f=DMENU_FONT,
                       h=DMENU_HEIGHT,
                       sb='#dc322f')
-    reply = proc.communicate('\n'.join(feeder.feed()).encode('utf-8'))[0]
+    reply = proc.communicate('\n'.join(feeder.feed(prefix)).encode('utf-8'))[0]
     if reply:
         reply = reply.decode('utf-8')
+        cmd = reply
+        if prefix:
+            cmd = prefix + ' ' + cmd
         action = Action()
-        action.add_action(Action.layout_cmd, (reply))
+        action.add_action(Action.cmd, cmd)
         action.process()

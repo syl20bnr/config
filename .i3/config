@@ -91,8 +91,9 @@ bindsym $mod+e                    exec $scripts/dmenu_send_wks_to_output
 bindsym $mod+f                    exec $scripts/dmenu_jump_win -i $term
 # bindsym $mod+shift+f              exec urxvt
 bindsym $mod+g                    mode $default, exec $scripts/dmenu_jump_win
-bindsym $mod+q                    focus parent
-bindsym $mod+shift+q              focus child
+bindsym $mod+p                    focus parent
+bindsym $mod+shift+p              focus child
+bindsym $mod+q                    exec $scripts/dmenu_i3_cmd
 bindsym $mod+r                    workspace back_and_forth
 bindsym $mod+Return               fullscreen
 bindsym $mod+s                    exec $scripts/dmenu_send_win_to_workspace
@@ -101,7 +102,7 @@ bindsym $mod+t                    exec $scripts/run -a $term
 bindsym $mod+shift+t              exec $scripts/run -a $term --free
 bindsym $mod+w                    exec $scripts/dmenu_jump_cur_used_workspace
 bindsym $mod+x                    kill
-bindsym $mod+y                    exec $scripts/dmenu_layout
+bindsym $mod+y                    exec $scripts/dmenu_i3_cmd -p layout
 bindsym $mod+z                    exec i3lock -i ~/.img/ubisoft.png -c 000000
 
 # ========================================================================
