@@ -37,8 +37,9 @@ def feed(win_inst=None, output='all'):
         instances = {}
         # adds windows and their ids to the clients dictionary
         for window in windows:
+            print window
             name = window['name']
-            inst = _get_X_window_instance(name)
+            inst = _get_X_window_instance(window['window'])
             if inst:
                 eligible = win_inst is None or win_inst == inst
                 if eligible and output != 'all':
@@ -57,16 +58,17 @@ def feed(win_inst=None, output='all'):
     return res
 
 
-def _get_X_window_instance(name):
+def _get_X_window_instance(id):
     ''' Returns the instance of the window with the given name.
     None if no instance is found.
     '''
     inst = None
-    cmd = (u'xprop -name "{0}" | grep "WM_CLASS(STRING)"'.format(name))
+    cmd = u'xprop -id "{0}" | grep "WM_CLASS(STRING)"'.format(id)
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
     out = p.stdout.read()
     if out:
-        m = re.match(r'^WM_CLASS\(STRING\)\s=\s"(.*?)"', out)
+        print out
+        m = re.match(r'^.*=\s"(.*?)"', out)
         if m:
             inst = m.group(1)
     return inst
