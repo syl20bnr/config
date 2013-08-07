@@ -72,11 +72,6 @@ client.focused           #859900 #859900 #eee8d5
 client.focused_inactive  #859900 #002b36 #657b83
 client.unfocused         #073642 #002b36 #657b83
 
-# volume bindings
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
-
 # ========================================================================
 #                              Key Bindings
 # ========================================================================
@@ -120,6 +115,7 @@ set $i3          i3
 set $mon         i3 > monitor config.
 set $monk        i3 > monitor config. > @work
 set $resize      i3 > resize
+set $multimedia  multimedia
 set $outputA     monitor 1
 set $outputB     monitor 2
 
@@ -164,6 +160,22 @@ mode "$outputB" {
     bindsym       w           mode $default, exec $scripts/dmenu_jump_cur_used_workspace $monargB
 }
 bindsym $mod+2 mode $outputB
+
+# Mode: multimedia -------------------------------------------------------
+
+set $updatebar killall -USR1 i3status 
+mode "$multimedia" {
+    # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindsym  Escape           mode $default
+    bindcode $upmode          mode $default
+    bindcode $quitmode        mode $default
+    bindcode $quitmode2       mode $default
+    # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
+    bindsym       $up         exec "amixer -q set Master 2dB+ unmute; $updatebar"
+    bindsym       $down       exec "amixer -q set Master 2dB- unmute; $updatebar"
+    bindsym       m           exec "amixer -q set Master toggle; $updatebar"  
+}
+bindsym $mod+m mode $multimedia
 
 # Mode: monitor ----------------------------------------------------------
 
