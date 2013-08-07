@@ -5,8 +5,6 @@
 
 import string
 
-import i3
-
 
 def get_prompt(verb):
     return "{0} workspace ->".format(verb)
@@ -24,16 +22,8 @@ def get_workspaces_no_prefix():
 
 
 def feed():
-    ''' Return a list of all possible workspaces formed with one char with
-    special prefixes for more possibilities.
-    Current workspaces are prefixed with a dot '>', so the ',' workspace
-    does not exist.
-    '''
+    ''' Return a list of all possible workspaces formed with one char. '''
     workspaces = get_workspaces_no_prefix()
-    for i, ws in enumerate(workspaces):
-        workspace = i3.filter(name=ws)
-        if workspace:
-            workspaces[i] = ',' + ws
     return workspaces
 
 if __name__ == '__main__':

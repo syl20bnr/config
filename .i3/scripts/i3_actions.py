@@ -3,16 +3,13 @@
 # author: syl20bnr (2013)
 # goal: i3 actions module.
 
-import os
 from subprocess import Popen
 
 import dmenu
 
-MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
-DMENU_EARLY = os.path.normpath(os.path.join(MODULE_PATH, '../bin/dmenu_early'))
-
 DMENU_MAX_ROW = 32
 DMENU_HEIGHT = 18
+DMENU_FONT = 'DejaVu Sans Mono-10:normal'
 
 
 class Action(object):
@@ -47,8 +44,7 @@ class Action(object):
         elif workspace == '=':
             return "scratchpad show"
         else:
-            workspace_id = self._get_workspace_id(workspace)
-            return "workspace {0}".format(workspace_id)
+            return "workspace {0}".format(workspace)
 
     def send_workspace_to_output(self, output):
         ''' Send the current workspace to the specified output. '''
@@ -61,16 +57,10 @@ class Action(object):
         elif workspace == '=':
             return "move scratchpad"
         else:
-            workspace_id = self._get_workspace_id(workspace)
-            return "move workspace {0}".format(workspace_id)
+            return "move workspace {0}".format(workspace)
 
     def layout_cmd(self, cmd):
         return "layout {0}".format(cmd)
-
-    def _get_workspace_id(self, raw):
-        workspace_id = raw.decode('utf-8').rstrip()
-        workspace_id = workspace_id.replace(',', '')
-        return workspace_id
 
 
 # ----------------------------------------------------------------------------
@@ -78,7 +68,7 @@ class Action(object):
 # ----------------------------------------------------------------------------
 
 
-def launch_app(feeder, output='all', free=False):
+def launch_app(feeder, app=None, output='all', free=False):
     ''' Launch an application on the specified monitor.
     output='all' means the current workspace on the current monitor.
     If free is true then the application is opened in a new workspace.
@@ -86,9 +76,12 @@ def launch_app(feeder, output='all', free=False):
     from feeders import cur_workspace
     from feeders.free_workspaces import get_free_workspaces
     from feeders.cur_output import get_current_output
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt(free, output),
-                      height=DMENU_HEIGHT)
-    reply = proc.communicate(feeder.feed().encode('utf-8'))[0]
+    reply = app
+    if not reply:
+        proc = dmenu.call(p=feeder.get_prompt(free, output),
+                          f=DMENU_FONT,
+                          h=DMENU_HEIGHT)
+        reply = proc.communicate(feeder.feed().encode('utf-8'))[0]
     if reply:
         if not free and (output == 'all' or output == get_current_output()):
             # open on the current workspace
@@ -123,8 +116,10 @@ def jump_to_window(feeder, inst, output='all'):
     ''' Jump to the window chosen by the user using dmenu. '''
     windows = feeder.feed(inst, output)
     size = max([0, min([DMENU_MAX_ROW, len(windows)])])
-    proc = dmenu.call('/usr/bin/dmenu',
-                      feeder.get_prompt(inst, output), nl=size)
+    proc = dmenu.call(p=feeder.get_prompt(inst, output),
+                      f=DMENU_FONT,
+                      l=size,
+                      sb='#b58900')
     reply = proc.communicate('\n'.join(windows).encode('utf-8'))[0]
     if reply:
         win = reply.decode('utf-8').rstrip()
@@ -135,8 +130,10 @@ def jump_to_window(feeder, inst, output='all'):
 
 def jump_to_workspace(feeder):
     ''' Jump to the workspace chosen by the user using dmenu. '''
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt("Go to"),
-                      height=DMENU_HEIGHT, ret_early=True)
+    proc = dmenu.call(p=feeder.get_prompt("Go to"),
+                      h=DMENU_HEIGHT,
+                      r=True,
+                      sb='#d33682')
     reply = proc.communicate(
         '\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
@@ -149,8 +146,11 @@ def jump_to_currently_used_workspace(feeder, output='all'):
     ''' Jump to a curently used workspace on the specified outputs
     and chosen by the user using dmenu.
     '''
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt("Go to", output),
-                      height=DMENU_HEIGHT, ret_early=True)
+    proc = dmenu.call(p=feeder.get_prompt("Go to", output),
+                      f=DMENU_FONT,
+                      h=DMENU_HEIGHT,
+                      r=True,
+                      sb='#d33682')
     reply = proc.communicate('\n'.join(feeder.feed(output)).encode('utf-8'))[0]
     if reply:
         action = Action()
@@ -164,8 +164,11 @@ def send_workspace_to_output(feeder):
     cur_wks = cur_workspace.get_current_workspace()
     if not cur_wks:
         return
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt(),
-                      height=DMENU_HEIGHT, ret_early=True)
+    proc = dmenu.call(p=feeder.get_prompt(),
+                      f=DMENU_FONT,
+                      h=DMENU_HEIGHT,
+                      r=True,
+                      sb='#268bd2')
     outputs = feeder.get_outputs_dictionary()
     reply = proc.communicate(
         '\n'.join(sorted(outputs.keys())).encode('utf-8'))[0]
@@ -177,8 +180,11 @@ def send_workspace_to_output(feeder):
 
 def send_window_to_workspace(feeder):
     ''' Send the current window to the selected workspace. '''
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt("Send to"),
-                      height=DMENU_HEIGHT, ret_early=True)
+    proc = dmenu.call(p=feeder.get_prompt("Send to"),
+                      f=DMENU_FONT,
+                      h=DMENU_HEIGHT,
+                      r=True,
+                      sb='#6c71c4')
     reply = proc.communicate('\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
         action = Action()
@@ -202,8 +208,11 @@ def send_window_to_free_workspace(feeder, output):
 
 def send_window_to_used_workspace(feeder, output):
     ''' Send the current window to a used workspace on the given output. '''
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt("Send to", output),
-                      height=DMENU_HEIGHT, ret_early=True)
+    proc = dmenu.call(p=feeder.get_prompt("Send to", output),
+                      f=DMENU_FONT,
+                      h=DMENU_HEIGHT,
+                      r=True,
+                      sb='#6c71c4')
     reply = proc.communicate('\n'.join(feeder.feed(output)).encode('utf-8'))[0]
     if reply:
         action = Action()
@@ -214,7 +223,10 @@ def send_window_to_used_workspace(feeder, output):
 
 def execute_layout_cmd(feeder):
     ''' Execute: i3-msg layout *user_choice* '''
-    proc = dmenu.call(DMENU_EARLY, feeder.get_prompt(), height=DMENU_HEIGHT)
+    proc = dmenu.call(p=feeder.get_prompt(),
+                      f=DMENU_FONT,
+                      h=DMENU_HEIGHT,
+                      sb='#dc322f')
     reply = proc.communicate('\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
         action = Action()
