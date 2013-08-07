@@ -114,7 +114,7 @@ def launch_app(feeder, app=None, output='all', free=False):
 
 def jump_to_window(feeder, inst, output='all'):
     ''' Jump to the window chosen by the user using dmenu. '''
-    windows = feeder.feed(inst, output)
+    (windows, d) = feeder.feed(inst, output)
     size = max([0, min([DMENU_MAX_ROW, len(windows)])])
     proc = dmenu.call(p=feeder.get_prompt(inst, output),
                       f=DMENU_FONT,
@@ -122,9 +122,8 @@ def jump_to_window(feeder, inst, output='all'):
                       sb='#b58900')
     reply = proc.communicate('\n'.join(windows).encode('utf-8'))[0]
     if reply:
-        win = reply.decode('utf-8').rstrip()
         action = Action()
-        action.add_action(Action.jump_to_window, (windows.get(win)))
+        action.add_action(Action.jump_to_window, (d.get(reply)))
         action.process()
 
 

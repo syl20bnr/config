@@ -23,16 +23,18 @@ def get_prompt(win_inst=None, output='all'):
     return "Go to {0} ->".format(prompt)
 
 
-def feed(win_inst=None, output='all'):
+def get_windows(win_inst=None, output='all'):
     ''' Returns a dictionary of key-value pairs of a window text and window id.
     Each window text is of format "[instance] window title (instance number)"
     '''
     res = {}
+    lmax = 0
     for ws in workspaces.get_workspaces_no_prefix():
         workspace = i3.filter(name=ws)
         if not workspace:
             continue
         workspace = workspace[0]
+        wname = workspace['name']
         windows = i3.filter(workspace, nodes=[])
         instances = {}
         # adds windows and their ids to the clients dictionary
@@ -47,8 +49,12 @@ def feed(win_inst=None, output='all'):
                     eligible = i3.filter(tree, name=name)
                 if eligible:
                     win = window['name']
-                    if not win_inst:
-                        win = u'[{0}] {1}'.format(inst, win)
+                    if win_inst:
+                        win = u'({0}) {1}'.format(wname, win)
+                    else:
+                        if len(inst) + 2 > lmax:
+                            lmax = len(inst) + 2
+                        win = u'({0}) [{1}] {2}'.format(wname, inst, win)
                     # appends an instance number if other instances are present
                     if win in instances:
                         instances[win] += 1
@@ -56,7 +62,16 @@ def feed(win_inst=None, output='all'):
                     else:
                         instances[win] = 1
                     res[win] = window['id']
+    if lmax:
+        res = _format_dict(res, lmax)
     return res
+
+
+def feed(win_inst=None, output='all'):
+    ''' Returns a tuple (l, d) where l is a sorted list of windows and d the
+    dictionary to map their ID.'''
+    windows = get_windows(win_inst, output)
+    return (sorted(windows.keys()), windows)
 
 
 def _get_X_window_instance(id):
@@ -74,6 +89,19 @@ def _get_X_window_instance(id):
     return inst
 
 
+def _format_dict(d, lmax):
+    ''' Align the window names. '''
+    res = {}
+    r = re.compile(r'(.*?)(\[.*?\])(.*)$')
+    for k, v in d.iteritems():
+        m = re.match(r, k)
+        padding = lmax - len(m.group(2))
+        if padding > 0:
+            k = r.sub(r'\1\2' + ' '*padding + r'\3', k)
+        res[k] = v
+    return res
+
+
 if __name__ == '__main__':
     import argparse
     PARSER = argparse.ArgumentParser(prog='windows')
@@ -83,4 +111,4 @@ if __name__ == '__main__':
                         help='X window instance name.')
     args = PARSER.parse_args()
     mon = common.get_monitor_value(args)
-    print('\n'.join(feed(args.instance, mon)))
+    print('\n'.join(feed(args.instance, mon)[0]))
