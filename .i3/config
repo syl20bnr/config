@@ -128,6 +128,7 @@ set $outputB     monitor 2
 set $monargA -m 0
 mode "$outputA" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindsym  Escape           mode $default
     bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
@@ -147,6 +148,7 @@ bindsym $mod+1 mode $outputA
 set $monargB -m 1
 mode "$outputB" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindsym  Escape           mode $default
     bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
@@ -168,6 +170,7 @@ bindsym $mod+2 mode $outputB
 mode "$mon" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
     bindcode $upmode          mode $i3
+    bindsym  Escape           mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
     bindsym       k           mode $monk
@@ -181,6 +184,7 @@ mode "$mon" {
 mode "$monk" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
     bindcode $upmode          mode $mon
+    bindsym  Escape           mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
@@ -193,6 +197,7 @@ mode "$monk" {
 mode "$resize" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
     bindcode $upmode          mode $i3
+    bindsym  Escape           mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
@@ -210,6 +215,7 @@ mode "$resize" {
 
 mode "$i3" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
+    bindsym  Escape           mode $default
     bindcode $upmode          mode $default
     bindcode $quitmode        mode $default
     bindcode $quitmode2       mode $default
