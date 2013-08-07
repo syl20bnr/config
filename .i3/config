@@ -93,7 +93,7 @@ bindsym $mod+semicolon            exec i3-input -P "i3 command -> "
 bindsym $mod+d                    exec $scripts/dmenu_run
 bindsym $mod+shift+d              exec $scripts/dmenu_run --free
 bindsym $mod+e                    exec $scripts/dmenu_send_wks_to_output
-bindsym $mod+f                    exec urxvt
+bindsym $mod+f                    exec $scripts/dmenu_jump_win -i $term
 # bindsym $mod+shift+f              exec urxvt
 bindsym $mod+g                    mode $default, exec $scripts/dmenu_jump_win
 bindsym $mod+q                    focus parent
@@ -101,8 +101,9 @@ bindsym $mod+shift+q              focus child
 bindsym $mod+r                    workspace back_and_forth
 bindsym $mod+Return               fullscreen
 bindsym $mod+s                    exec $scripts/dmenu_send_win_to_workspace
-bindsym $mod+t                    exec $scripts/dmenu_jump_win -i $term
 bindsym $mod+shift+space          floating toggle
+bindsym $mod+t                    exec $scripts/run -a $term
+bindsym $mod+shift+t              exec $scripts/run -a $term --free
 bindsym $mod+w                    exec $scripts/dmenu_jump_cur_used_workspace
 bindsym $mod+x                    kill
 bindsym $mod+y                    exec $scripts/dmenu_layout
@@ -133,10 +134,12 @@ mode "$outputA" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
     bindsym       d           mode $default, exec $scripts/dmenu_run $monargA
     bindsym shift+d           mode $default, exec $scripts/dmenu_run $monargA --free
+    bindsym       f           mode $default, exec $scripts/dmenu_jump_win -i $term $monargA
     bindsym       g           mode $default, exec $scripts/dmenu_jump_win $monargA
     bindsym       s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace $monargA
     bindsym shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace $monargA
-    bindsym       t           mode $default, exec $scripts/dmenu_jump_win -i $term $monargA
+    bindsym       t           mode $default, exec $scripts/run -a $term $monargA
+    bindsym shift+t           mode $default, exec $scripts/run -a $term $monargA --free
     bindsym       w           mode $default, exec $scripts/dmenu_jump_cur_used_workspace $monargA
 }
 bindsym $mod+1 mode $outputA
@@ -150,10 +153,12 @@ mode "$outputB" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
     bindsym       d           mode $default, exec $scripts/dmenu_run $monargB
     bindsym shift+d           mode $default, exec $scripts/dmenu_run $monargB --free
+    bindsym       f           mode $default, exec $scripts/dmenu_jump_win -i $term $monargB
     bindsym       g           mode $default, exec $scripts/dmenu_jump_win $monargB
     bindsym       s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace $monargB
     bindsym shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace $monargB
-    bindsym       t           mode $default, exec $scripts/dmenu_jump_win -i $term $monargB
+    bindsym       t           mode $default, exec $scripts/run -a $term $monargB
+    bindsym shift+t           mode $default, exec $scripts/run -a $term $monargB --free
     bindsym       w           mode $default, exec $scripts/dmenu_jump_cur_used_workspace $monargB
 }
 bindsym $mod+2 mode $outputB
