@@ -83,6 +83,7 @@ def launch_app(feeder, app=None, output='all', free=False):
                           h=DMENU_HEIGHT)
         reply = proc.communicate(feeder.feed().encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         if not free and (output == 'all' or output == get_current_output()):
             # open on the current workspace
             action = Action()
@@ -122,6 +123,7 @@ def jump_to_window(feeder, inst, output='all'):
                       sb='#b58900')
     reply = proc.communicate('\n'.join(windows).encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         action = Action()
         action.add_action(Action.jump_to_window, (d.get(reply)))
         action.process()
@@ -136,6 +138,7 @@ def jump_to_workspace(feeder):
     reply = proc.communicate(
         '\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         action = Action()
         action.add_action(Action.jump_to_workspace, (reply))
         action.process()
@@ -152,6 +155,7 @@ def jump_to_currently_used_workspace(feeder, output='all'):
                       sb='#d33682')
     reply = proc.communicate('\n'.join(feeder.feed(output)).encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         action = Action()
         action.add_action(Action.jump_to_workspace, (reply))
         action.process()
@@ -172,6 +176,7 @@ def send_workspace_to_output(feeder):
     reply = proc.communicate(
         '\n'.join(sorted(outputs.keys())).encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         action = Action()
         action.add_action(Action.send_workspace_to_output, (outputs[reply]))
         action.process()
@@ -186,6 +191,7 @@ def send_window_to_workspace(feeder):
                       sb='#6c71c4')
     reply = proc.communicate('\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         action = Action()
         action.add_action(Action.send_window_to_workspace, (reply))
         action.process()
@@ -214,6 +220,7 @@ def send_window_to_used_workspace(feeder, output):
                       sb='#6c71c4')
     reply = proc.communicate('\n'.join(feeder.feed(output)).encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         action = Action()
         action.add_action(Action.send_window_to_workspace, (reply))
         action.add_action(Action.jump_to_workspace, (reply))
@@ -228,6 +235,7 @@ def execute_layout_cmd(feeder):
                       sb='#dc322f')
     reply = proc.communicate('\n'.join(feeder.feed()).encode('utf-8'))[0]
     if reply:
+        reply = reply.decode('utf-8')
         action = Action()
         action.add_action(Action.layout_cmd, (reply))
         action.process()
