@@ -84,7 +84,7 @@ bindsym $mod+shift+$left          move left
 bindsym $mod+shift+$down          move down
 bindsym $mod+shift+$up            move up
 bindsym $mod+shift+$right         move right
-bindsym $mod+semicolon            exec i3-input -P "i3 command -> "
+bindsym $mod+semicolon            exec i3-input -P "i3-msg "
 bindsym $mod+d                    exec $scripts/dmenu_run
 bindsym $mod+shift+d              exec $scripts/dmenu_run --free
 bindsym $mod+e                    exec $scripts/dmenu_send_wks_to_output
@@ -96,7 +96,9 @@ bindsym $mod+p                    focus parent
 bindsym $mod+shift+p              focus child
 bindsym $mod+r                    workspace back_and_forth
 bindsym $mod+Return               fullscreen
-bindsym $mod+s                    exec $scripts/dmenu_send_win_to_workspace
+bindsym $mod+s                    exec $scripts/dmenu_send_win_to_used_workspace
+bindsym $mod+shift+s              exec $scripts/dmenu_send_win_to_free_workspace
+bindsym $mod+control+s            exec $scripts/dmenu_send_win_to_visible_workspace
 bindsym $mod+shift+space          floating toggle
 bindsym $mod+t                    exec $scripts/run -a $term
 bindsym $mod+shift+t              exec $scripts/run -a $term --free

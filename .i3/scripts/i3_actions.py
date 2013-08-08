@@ -7,6 +7,10 @@ from subprocess import Popen
 
 import dmenu
 from constants import DMENU_MAX_ROW, DMENU_FONT, DMENU_HEIGHT
+from feeders import (cur_workspace,
+                     free_workspaces,
+                     cur_output,
+                     outputs)
 
 
 class Action(object):
@@ -71,9 +75,6 @@ def launch_app(feeder, app=None, output='all', free=False):
     output='all' means the current workspace on the current monitor.
     If free is true then the application is opened in a new workspace.
     '''
-    from feeders import cur_workspace
-    from feeders.free_workspaces import get_free_workspaces
-    from feeders.cur_output import get_current_output
     reply = app
     if not reply:
         proc = dmenu.call(p=feeder.get_prompt(free, output),
@@ -82,28 +83,32 @@ def launch_app(feeder, app=None, output='all', free=False):
         reply = proc.communicate(feeder.feed().encode('utf-8'))[0]
     if reply:
         reply = reply.decode('utf-8')
-        if not free and (output == 'all' or output == get_current_output()):
+        if not free and (output == 'all' or
+                         output == cur_output.get_current_output()):
             # open on the current workspace
             action = Action()
             action.add_action(Action.exec_, (reply))
             action.process()
-        if not free and (output != 'all' and output != get_current_output()):
+        if not free and (output != 'all' and
+                         output != cur_output.get_current_output()):
             # open on the visible workspace on another output
             otherw = cur_workspace.feed(output)
             action = Action()
             action.add_action(Action.jump_to_workspace, (otherw))
             action.add_action(Action.exec_, (reply))
             action.process()
-        elif free and (output == 'all' or output == get_current_output()):
+        elif free and (output == 'all' or
+                       output == cur_output.get_current_output()):
             # free workspace on the current output
-            freew = get_free_workspaces()[0]
+            freew = free_workspaces.get_free_workspaces()[0]
             action = Action()
             action.add_action(Action.jump_to_workspace, (freew))
             action.add_action(Action.exec_, (reply))
             action.process()
-        elif free and (output != 'all' and output != get_current_output()):
+        elif free and (output != 'all' and
+                       output != cur_output.get_current_output()):
             # free workspace on another output
-            freew = get_free_workspaces()[0]
+            freew = free_workspaces.get_free_workspaces()[0]
             action = Action()
             action.add_action(Action.jump_to_workspace, (freew))
             action.add_action(Action.exec_, (reply))
@@ -170,13 +175,13 @@ def send_workspace_to_output(feeder):
                       h=DMENU_HEIGHT,
                       r=True,
                       sb='#268bd2')
-    outputs = feeder.get_outputs_dictionary()
+    outs = feeder.get_outputs_dictionary()
     reply = proc.communicate(
         '\n'.join(sorted(outputs.keys())).encode('utf-8'))[0]
     if reply:
         reply = reply.decode('utf-8')
         action = Action()
-        action.add_action(Action.send_workspace_to_output, (outputs[reply]))
+        action.add_action(Action.send_workspace_to_output, (outs[reply]))
         action.process()
 
 
@@ -225,6 +230,18 @@ def send_window_to_used_workspace(feeder, output):
         action.process()
 
 
+def send_window_to_visible_workspace(feeder):
+    ''' Send the current window to the visible workspace on the
+    next output.
+    '''
+    ooutput = _get_next_output()
+    otherw = cur_workspace.feed(ooutput)
+    action = Action()
+    action.add_action(Action.send_window_to_workspace, (otherw))
+    action.add_action(Action.jump_to_workspace, (otherw))
+    action.process()
+
+
 def execute_cmd(feeder, prefix):
     ''' Execute: i3-msg prefix *user_choice* '''
     proc = dmenu.call(p=feeder.get_prompt(prefix),
@@ -240,3 +257,12 @@ def execute_cmd(feeder, prefix):
         action = Action()
         action.add_action(Action.cmd, cmd)
         action.process()
+
+
+def _get_next_output():
+    coutput = cur_output.get_current_output()
+    outs = outputs.get_outputs_dictionary()
+    for o in outs.itervalues():
+        if o != coutput:
+            return o
+    return None
