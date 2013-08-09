@@ -124,7 +124,8 @@ def jump_to_window(feeder, inst, output='all'):
     ''' Jump to the window chosen by the user using dmenu. '''
     (wins, d) = feeder.feed(inst, output)
     size = max([0, min([DMENU_MAX_ROW, len(wins)])])
-    proc = dmenu.call(p=feeder.get_prompt(inst, output),
+    proc = dmenu.call(p=feeder.get_prompt("Go to",
+                                          win_inst=inst, output=output),
                       f=DMENU_FONT,
                       l=size,
                       sb='#b58900')
@@ -246,11 +247,11 @@ def send_window_to_visible_workspace(feeder):
     action.process()
 
 
-def send_window_to_win_workspace(feeder):
+def send_window_to_win_workspace(feeder, output='all'):
     ''' Send the current window to the workspace of the selected window. '''
-    (wins, d) = feeder.feed()
+    (wins, d) = feeder.feed(output=output)
     size = max([0, min([DMENU_MAX_ROW, len(wins)])])
-    proc = dmenu.call(p="Send to workspace of window ->",
+    proc = dmenu.call(p=feeder.get_prompt("Send to", output=output),
                       f=DMENU_FONT,
                       l=size,
                       sb='#d33682')
