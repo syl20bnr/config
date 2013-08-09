@@ -47,13 +47,14 @@ for_window [class="I3-exit"] floating enable; border 1pixel
 
 # i3 bar
 bar {
-    id                main
-    status_command    i3status+
-    position          bottom
-    mode              hide
-    modifier          $mod
-    workspace_buttons yes
-    tray_output       primary
+    id                   main
+    status_command       i3status+
+    position             bottom
+    mode                 hide
+    modifier             $mod
+    workspace_buttons    no
+    binding_mode_button  yes
+    tray_output          primary
 
     colors {
          background #002b36
