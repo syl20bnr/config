@@ -77,37 +77,37 @@ client.unfocused         #073642 #002b36 #657b83
 #                              Key Bindings
 # ========================================================================
 
-bindsym $mod+$left                focus left
-bindsym $mod+$down                focus down
-bindsym $mod+$up                  focus up
-bindsym $mod+$right               focus right
-bindsym $mod+shift+$left          move left
-bindsym $mod+shift+$down          move down
-bindsym $mod+shift+$up            move up
-bindsym $mod+shift+$right         move right
-bindsym $mod+semicolon            exec i3-input -P "i3-msg "
-bindsym $mod+d                    exec $scripts/dmenu_run
-bindsym $mod+shift+d              exec $scripts/dmenu_run --free
-bindsym $mod+e                    exec $scripts/dmenu_send_wks_to_output
-bindsym $mod+Escape               exec $scripts/dmenu_logout
-bindsym $mod+f                    exec $scripts/dmenu_jump_win -i $term
-bindsym $mod+g                    mode $default, exec $scripts/dmenu_jump_win
-bindsym $mod+i                    exec $scripts/dmenu_i3_cmd
-bindsym $mod+p                    focus parent
-bindsym $mod+shift+p              focus child
-bindsym $mod+r                    workspace back_and_forth
-bindsym $mod+Return               fullscreen
-bindsym $mod+s                    exec $scripts/dmenu_send_win_to_used_workspace
-bindsym $mod+shift+s              exec $scripts/dmenu_send_win_to_free_workspace
-bindsym $mod+control+s            exec $scripts/dmenu_send_win_to_win_workspace
-bindsym $mod+control+shift+s      exec $scripts/dmenu_send_win_to_visible_workspace
-bindsym $mod+shift+space          floating toggle
-bindsym $mod+t                    exec $scripts/run -a $term
-bindsym $mod+shift+t              exec $scripts/run -a $term --free
-bindsym $mod+w                    exec $scripts/dmenu_jump_cur_used_workspace
-bindsym $mod+x                    kill
-bindsym $mod+y                    exec $scripts/dmenu_i3_cmd -p layout
-bindsym $mod+z                    exec i3lock -i ~/.img/ubisoft.png -c 000000
+bindsym $mod+$left            focus left
+bindsym $mod+$down            focus down
+bindsym $mod+$up              focus up
+bindsym $mod+$right           focus right
+bindsym $mod+shift+$left      move left
+bindsym $mod+shift+$down      move down
+bindsym $mod+shift+$up        move up
+bindsym $mod+shift+$right     move right
+bindsym $mod+semicolon        exec i3-input -P "i3-msg "
+bindsym $mod+d                exec $scripts/dmenu_run
+bindsym $mod+shift+d          exec $scripts/dmenu_run --free
+bindsym $mod+e                exec $scripts/dmenu_send_wks_to_output
+bindsym $mod+Escape           exec $scripts/dmenu_logout
+bindsym $mod+f                exec $scripts/dmenu_jump_win -i $term
+bindsym $mod+g                mode $default, exec $scripts/dmenu_jump_win
+bindsym $mod+i                exec $scripts/dmenu_i3_cmd
+bindsym $mod+p                focus parent
+bindsym $mod+shift+p          focus child
+bindsym $mod+r                workspace back_and_forth
+bindsym $mod+Return           fullscreen
+bindsym $mod+s                exec $scripts/dmenu_send_win_to_used_workspace
+bindsym $mod+shift+s          exec $scripts/dmenu_send_win_to_free_workspace
+bindsym $mod+control+s        exec $scripts/dmenu_send_win_to_win_workspace
+bindsym $mod+control+shift+s  exec $scripts/dmenu_send_win_to_visible_workspace
+bindsym $mod+shift+space      floating toggle
+bindsym $mod+t                exec $scripts/run -a $term
+bindsym $mod+shift+t          exec $scripts/run -a $term --free
+bindsym $mod+w                exec $scripts/dmenu_jump_cur_used_workspace
+bindsym $mod+x                kill
+bindsym $mod+y                exec $scripts/dmenu_i3_cmd -p layout
+bindsym $mod+z                exec i3lock -i ~/.img/ubisoft.png -c 000000
 
 # ========================================================================
 #                                  Modes
@@ -129,42 +129,42 @@ set $outputB     monitor 2
 set $monargA -m 0
 mode "$outputA" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindsym  Escape           mode $default
-    bindcode $upmode          mode $default
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
+    bindsym  Escape             mode $default
+    bindcode $upmode            mode $default
+    bindcode $quitmode          mode $default
+    bindcode $quitmode2         mode $default
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindsym       d           mode $default, exec $scripts/dmenu_run $monargA
-    bindsym shift+d           mode $default, exec $scripts/dmenu_run $monargA --free
-    bindsym       f           mode $default, exec $scripts/dmenu_jump_win -i $term $monargA
-    bindsym       g           mode $default, exec $scripts/dmenu_jump_win $monargA
-    bindsym       s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace $monargA
-    bindsym shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace $monargA
-    bindsym control+s         mode $default, exec $scripts/dmenu_send_win_to_win_workspace $monargA
-    bindsym       t           mode $default, exec $scripts/run -a $term $monargA
-    bindsym shift+t           mode $default, exec $scripts/run -a $term $monargA --free
-    bindsym       w           mode $default, exec $scripts/dmenu_jump_cur_used_workspace $monargA
+    bindsym         d           mode $default, exec $scripts/dmenu_run $monargA
+    bindsym   shift+d           mode $default, exec $scripts/dmenu_run $monargA --free
+    bindsym         f           mode $default, exec $scripts/dmenu_jump_win -i $term $monargA
+    bindsym         g           mode $default, exec $scripts/dmenu_jump_win $monargA
+    bindsym         s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace $monargA
+    bindsym   shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace $monargA
+    bindsym control+s           mode $default, exec $scripts/dmenu_send_win_to_win_workspace $monargA
+    bindsym         t           mode $default, exec $scripts/run -a $term $monargA
+    bindsym   shift+t           mode $default, exec $scripts/run -a $term $monargA --free
+    bindsym         w           mode $default, exec $scripts/dmenu_jump_cur_used_workspace $monargA
 }
 bindsym $mod+1 mode $outputA
 
 set $monargB -m 1
 mode "$outputB" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindsym  Escape           mode $default
-    bindcode $upmode          mode $default
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
+    bindsym  Escape             mode $default
+    bindcode $upmode            mode $default
+    bindcode $quitmode          mode $default
+    bindcode $quitmode2         mode $default
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindsym       d           mode $default, exec $scripts/dmenu_run $monargB
-    bindsym shift+d           mode $default, exec $scripts/dmenu_run $monargB --free
-    bindsym       f           mode $default, exec $scripts/dmenu_jump_win -i $term $monargB
-    bindsym       g           mode $default, exec $scripts/dmenu_jump_win $monargB
-    bindsym       s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace $monargB
-    bindsym shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace $monargB
-    bindsym control+s         mode $default, exec $scripts/dmenu_send_win_to_win_workspace $monargB
-    bindsym       t           mode $default, exec $scripts/run -a $term $monargB
-    bindsym shift+t           mode $default, exec $scripts/run -a $term $monargB --free
-    bindsym       w           mode $default, exec $scripts/dmenu_jump_cur_used_workspace $monargB
+    bindsym         d           mode $default, exec $scripts/dmenu_run $monargB
+    bindsym   shift+d           mode $default, exec $scripts/dmenu_run $monargB --free
+    bindsym         f           mode $default, exec $scripts/dmenu_jump_win -i $term $monargB
+    bindsym         g           mode $default, exec $scripts/dmenu_jump_win $monargB
+    bindsym         s           mode $default, exec $scripts/dmenu_send_win_to_used_workspace $monargB
+    bindsym   shift+s           mode $default, exec $scripts/dmenu_send_win_to_free_workspace $monargB
+    bindsym control+s           mode $default, exec $scripts/dmenu_send_win_to_win_workspace $monargB
+    bindsym         t           mode $default, exec $scripts/run -a $term $monargB
+    bindsym   shift+t           mode $default, exec $scripts/run -a $term $monargB --free
+    bindsym         w           mode $default, exec $scripts/dmenu_jump_cur_used_workspace $monargB
 }
 bindsym $mod+2 mode $outputB
 
@@ -173,73 +173,73 @@ bindsym $mod+2 mode $outputB
 set $updatebar killall -USR1 i3status 
 mode "$multimedia" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $modes
-    bindsym  Escape           mode $default
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
+    bindcode $upmode            mode $modes
+    bindsym  Escape             mode $default
+    bindcode $quitmode          mode $default
+    bindcode $quitmode2         mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       $up         exec "amixer -q set Master 2dB+ unmute; $updatebar"
-    bindsym       $down       exec "amixer -q set Master 2dB- unmute; $updatebar"
-    bindsym       m           exec "amixer -q set Master toggle; $updatebar"  
+    bindsym         $up         exec "amixer -q set Master 2dB+ unmute; $updatebar"
+    bindsym         $down       exec "amixer -q set Master 2dB- unmute; $updatebar"
+    bindsym         m           exec "amixer -q set Master toggle; $updatebar"  
 }
 
 # Mode: monitor ----------------------------------------------------------
 
 mode "$mon" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $modes
-    bindsym  Escape           mode $default
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    bindsym       w           mode $monk
+    bindcode $upmode            mode $modes
+    bindsym  Escape             mode $default
+    bindcode $quitmode          mode $default
+    bindcode $quitmode2         mode $default
+    bindsym         w           mode $monk
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       c           exec xrandr --output DVI1 --auto --same-as LVDS1
-    bindsym       d           exec xrandr --output DVI1 --auto --right-of LVDS1
-    bindsym       l           exec xrandr --output DVI1 --auto --left-of LVDS1
-    bindsym       r           exec xrandr --output DVI1 --auto --right-of LVDS1
+    bindsym         c           exec xrandr --output DVI1 --auto --same-as LVDS1
+    bindsym         d           exec xrandr --output DVI1 --auto --right-of LVDS1
+    bindsym         l           exec xrandr --output DVI1 --auto --left-of LVDS1
+    bindsym         r           exec xrandr --output DVI1 --auto --right-of LVDS1
 }
 
 mode "$monk" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $mon
-    bindsym  Escape           mode $default
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
+    bindcode $upmode            mode $mon
+    bindsym  Escape             mode $default
+    bindcode $quitmode          mode $default
+    bindcode $quitmode2         mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       c           exec xrandr -s 0
-    bindsym       d           exec xrandr -s 1
+    bindsym         c           exec xrandr -s 0
+    bindsym         d           exec xrandr -s 1
 }
 
 # Mode: resize -----------------------------------------------------------
 
 mode "$resize" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindcode $upmode          mode $modes
-    bindsym  Escape           mode $default
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
+    bindcode $upmode            mode $modes
+    bindsym  Escape             mode $default
+    bindcode $quitmode          mode $default
+    bindcode $quitmode2         mode $default
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
-    bindsym       $left       resize grow    left 2 px or 2 ppt
-    bindsym shift+$left       resize shrink  left 2 px or 2 ppt
-    bindsym       $down       resize grow    down 2 px or 2 ppt
-    bindsym shift+$down       resize shrink  down 2 px or 2 ppt
-    bindsym       $up         resize grow      up 2 px or 2 ppt
-    bindsym shift+$up         resize shrink    up 2 px or 2 ppt
-    bindsym       $right      resize grow   right 2 px or 2 ppt
-    bindsym shift+$right      resize shrink right 2 px or 2 ppt
+    bindsym         $left       resize grow    left 2 px or 2 ppt
+    bindsym   shift+$left       resize shrink  left 2 px or 2 ppt
+    bindsym         $down       resize grow    down 2 px or 2 ppt
+    bindsym   shift+$down       resize shrink  down 2 px or 2 ppt
+    bindsym         $up         resize grow      up 2 px or 2 ppt
+    bindsym   shift+$up         resize shrink    up 2 px or 2 ppt
+    bindsym         $right      resize grow   right 2 px or 2 ppt
+    bindsym   shift+$right      resize shrink right 2 px or 2 ppt
 }
 
 # Mode: Main Modes for all secondary modes --------------------------------
 
 mode "$modes" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - -
-    bindsym  Escape           mode $default
-    bindcode $upmode          mode $default
-    bindcode $quitmode        mode $default
-    bindcode $quitmode2       mode $default
-    bindsym       m           mode $multimedia
-    bindsym       o           mode $mon
-    bindsym       r           mode $resize
+    bindsym  Escape             mode $default
+    bindcode $upmode            mode $default
+    bindcode $quitmode          mode $default
+    bindcode $quitmode2         mode $default
+    bindsym         m           mode $multimedia
+    bindsym         o           mode $mon
+    bindsym         r           mode $resize
     # - - - - - - - - - - - - - -  Key Map - - - - - - - - - - - - - - - -
 }
 bindsym $mod+o mode $modes
