@@ -20,7 +20,7 @@ def call(p='dmenu',
     ''' Returns a dmenu process with the specified title and number
     of rows.
     '''
-    cmd = [DMENU, '-f', '-z', '-i', '-b', '-l', str(l),
+    cmd = [DMENU, '-f', '-i', '-b', '-l', str(l),
            '-p', p, '-fn', f, '-nb', nb, '-nf', nf, '-sb', sb, '-sf', sf]
     if h:
         cmd.extend(['-h', str(h)])
