@@ -5,12 +5,16 @@
 
 from subprocess import Popen
 
+import i3
+
 import dmenu
 from constants import DMENU_MAX_ROW, DMENU_FONT, DMENU_HEIGHT
 from feeders import (cur_workspace,
+                     cur_workspaces,
                      free_workspaces,
                      cur_output,
-                     outputs)
+                     outputs,
+                     windows)
 
 
 class Action(object):
@@ -118,13 +122,13 @@ def launch_app(feeder, app=None, output='all', free=False):
 
 def jump_to_window(feeder, inst, output='all'):
     ''' Jump to the window chosen by the user using dmenu. '''
-    (windows, d) = feeder.feed(inst, output)
-    size = max([0, min([DMENU_MAX_ROW, len(windows)])])
+    (wins, d) = feeder.feed(inst, output)
+    size = max([0, min([DMENU_MAX_ROW, len(wins)])])
     proc = dmenu.call(p=feeder.get_prompt(inst, output),
                       f=DMENU_FONT,
                       l=size,
                       sb='#b58900')
-    reply = proc.communicate('\n'.join(windows).encode('utf-8'))[0]
+    reply = proc.communicate('\n'.join(wins).encode('utf-8'))[0]
     if reply:
         reply = reply.decode('utf-8')
         action = Action()
@@ -155,7 +159,7 @@ def jump_to_currently_used_workspace(feeder, output='all'):
                       f=DMENU_FONT,
                       h=DMENU_HEIGHT,
                       r=True,
-                      sb='#d33682')
+                      sb='#268bd2')
     reply = proc.communicate('\n'.join(feeder.feed(output)).encode('utf-8'))[0]
     if reply:
         reply = reply.decode('utf-8')
@@ -234,12 +238,35 @@ def send_window_to_visible_workspace(feeder):
     ''' Send the current window to the visible workspace on the
     next output.
     '''
-    ooutput = _get_next_output()
-    otherw = cur_workspace.feed(ooutput)
+    noutput = _get_next_output()
+    otherw = cur_workspace.feed(noutput)
     action = Action()
     action.add_action(Action.send_window_to_workspace, (otherw))
     action.add_action(Action.jump_to_workspace, (otherw))
     action.process()
+
+
+def send_window_to_win_workspace(feeder):
+    ''' Send the current window to the workspace of the selected window. '''
+    (wins, d) = feeder.feed()
+    size = max([0, min([DMENU_MAX_ROW, len(wins)])])
+    proc = dmenu.call(p="Send to workspace of window ->",
+                      f=DMENU_FONT,
+                      l=size,
+                      sb='#d33682')
+    ws = cur_workspace.feed()
+    excluded_wins = _get_window_ids_of_workspace(ws)
+    if excluded_wins:
+        # remove the wins of the current output from the list
+        wins = [k for k, v in d.iteritems() if v not in excluded_wins]
+    reply = proc.communicate('\n'.join(wins).encode('utf-8'))[0]
+    if reply:
+        ws = _get_window_workspace(d.get(reply))
+        reply = reply.decode('utf-8')
+        action = Action()
+        action.add_action(Action.send_window_to_workspace, (ws))
+        action.add_action(Action.jump_to_workspace, (ws))
+        action.process()
 
 
 def execute_cmd(feeder, prefix):
@@ -266,3 +293,21 @@ def _get_next_output():
         if o != coutput:
             return o
     return None
+
+
+def _get_window_workspace(win_id):
+    cworkspaces = cur_workspaces.get_cur_workspaces()
+    for ws in cworkspaces:
+        ws_tree = i3.filter(name=ws)
+        if i3.filter(tree=ws_tree, id=win_id):
+            return ws
+    return None
+
+
+def _get_window_ids_of_workspace(ws):
+    res = []
+    wks = i3.filter(name=ws)
+    wins = i3.filter(tree=wks, nodes=[])
+    for w in wins:
+        res.append(w['id'])
+    return res

@@ -86,6 +86,7 @@ bindsym $mod+shift+$down          move down
 bindsym $mod+shift+$up            move up
 bindsym $mod+shift+$right         move right
 bindsym $mod+semicolon            exec i3-input -P "i3-msg "
+bindsym $mod+a                    exec $scripts/dmenu_send_win_to_win_workspace
 bindsym $mod+d                    exec $scripts/dmenu_run
 bindsym $mod+shift+d              exec $scripts/dmenu_run --free
 bindsym $mod+e                    exec $scripts/dmenu_send_wks_to_output
