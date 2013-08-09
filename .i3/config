@@ -53,7 +53,7 @@ bar {
     mode                 hide
     modifier             $mod
     workspace_buttons    no
-    binding_mode_button  yes
+#    binding_mode_button  yes
     tray_output          primary
 
     colors {
