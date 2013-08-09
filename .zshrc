@@ -12,10 +12,17 @@ else
   print -P "\033AnSiTc %d"
 fi
 
-source $ZSH/oh-my-zsh.sh
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+COMPLETION_WAITING_DOTS="true"
+# Set to this to use case-sensitive completion
+CASE_SENSITIVE="true"
 
 # Customize to your needs...
 export PATH=/home/sbenner/.rbenv/shims:/home/sbenner/.rbenv/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export GIT_AUTHOR_EMAIL=sylvain.benner@ubisoft.com
+export EDITOR=vi
+
+source $ZSH/oh-my-zsh.sh
 
 # Always launch a ranger session
 if [[ $RANGER == "" ]]; then
@@ -23,16 +30,11 @@ if [[ $RANGER == "" ]]; then
   ranger "`pwd`"
 fi
 
-# script ends here
-
 # Some doc
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
@@ -45,6 +47,3 @@ fi
 
 # Uncomment following line if you want to disable autosetting terminal title.
 # DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
