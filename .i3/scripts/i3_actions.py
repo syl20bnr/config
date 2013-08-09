@@ -177,7 +177,7 @@ def send_workspace_to_output(feeder):
                       sb='#268bd2')
     outs = feeder.get_outputs_dictionary()
     reply = proc.communicate(
-        '\n'.join(sorted(outputs.keys())).encode('utf-8'))[0]
+        '\n'.join(sorted(outs.keys())).encode('utf-8'))[0]
     if reply:
         reply = reply.decode('utf-8')
         action = Action()
