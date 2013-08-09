@@ -254,7 +254,7 @@ def send_window_to_win_workspace(feeder, output='all'):
     proc = dmenu.call(p=feeder.get_prompt("Send to", output=output),
                       f=DMENU_FONT,
                       l=size,
-                      sb='#d33682')
+                      sb='#6c71c4')
     ws = cur_workspace.feed()
     excluded_wins = _get_window_ids_of_workspace(ws)
     if excluded_wins:
@@ -268,6 +268,8 @@ def send_window_to_win_workspace(feeder, output='all'):
         action.add_action(Action.send_window_to_workspace, (ws))
         action.add_action(Action.jump_to_workspace, (ws))
         action.process()
+
+#d33682
 
 
 def execute_cmd(feeder, prefix):
