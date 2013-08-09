@@ -13,14 +13,14 @@ import common
 import workspaces
 
 
-def get_prompt(win_inst=None, output='all'):
+def get_prompt(verb, win_inst=None, output='all'):
     prompt = "window"
     if win_inst:
         prompt = win_inst
     if output != 'all':
         m = common.get_natural_monitor_value(output)
         prompt += " on {0}".format(m)
-    return "Go to {0} ->".format(prompt)
+    return "{0} {1} ->".format(verb, prompt)
 
 
 def get_windows(win_inst=None, output='all'):
@@ -39,14 +39,14 @@ def get_windows(win_inst=None, output='all'):
         instances = {}
         # adds windows and their ids to the clients dictionary
         for window in windows:
-            name = window['name']
             inst = _get_X_window_instance(window['window'])
             if inst:
                 eligible = win_inst is None or win_inst == inst
                 if eligible and output != 'all':
                     # list only the windows on the specified output
+                    id_ = window['id']
                     tree = i3.filter(name=output)
-                    eligible = i3.filter(tree, name=name)
+                    eligible = i3.filter(tree, id=id_)
                 if eligible:
                     win = window['name']
                     if win_inst:
