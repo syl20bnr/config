@@ -18,7 +18,7 @@ def get_prompt(verb, output):
     return "{0} current {1} ->".format(verb, prompt)
 
 
-def get_cur_workspaces(output):
+def get_cur_workspaces(output='all'):
     ''' Return a list of all currently used workspaces on the specified
     output.
     '''
@@ -35,7 +35,7 @@ def get_cur_workspaces(output):
     return sorted(used)
 
 
-def feed(output):
+def feed(output='all'):
     ''' Return a list of all currently used workspaces on the specified
     output.
     '''
