@@ -259,5 +259,5 @@ exec --no-startup-id gnome-settings-daemon
 # work
 #exec --no-startup-id synergy
 #exec --no-startup-id /home/sbenner/.mouse_sens.sh
-#exec --no-startup-id feh --bg-fill ~/.img/summer-mountain-landscape-wallpaper.jpg
+#exec --no-startup-id feh --bg-fill ~/.img/mountain_range-1920x1080.jpg
 
