@@ -77,6 +77,10 @@ client.unfocused         #073642 #002b36 #657b83
 #                              Key Bindings
 # ========================================================================
 
+# refresh the i3bar when it appears
+bindcode 64 exec $updatebar
+bindcode 108 exec $updatebar
+
 bindsym $mod+$left            focus left
 bindsym $mod+$down            focus down
 bindsym $mod+$up              focus up
