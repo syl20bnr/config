@@ -105,6 +105,7 @@ bindsym $mod+Return           fullscreen
 bindsym $mod+shift+Return     floating toggle
 bindsym $mod+t                exec $scripts/run -a $term
 bindsym $mod+shift+t          exec $scripts/run -a $term --free
+bindsym $mod+control+t        exec xcwd | xargs $term -cd
 bindsym $mod+v                exec $scripts/dmenu_send_win_to_visible_workspace
 bindsym $mod+w                exec $scripts/dmenu_send_win_to_win_workspace
 bindsym $mod+x                kill
