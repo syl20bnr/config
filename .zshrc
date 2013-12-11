@@ -22,6 +22,10 @@ export PATH=/home/sbenner/.rbenv/shims:/home/sbenner/.rbenv/bin:/usr/lib/lightdm
 export GIT_AUTHOR_EMAIL=sylvain.benner@ubisoft.com
 export EDITOR=vi
 
+# aliases
+alias noproxy='http_proxy= HTTP_PROXY= https_proxy= HTTPS_PROXY='
+alias np='noproxy'
+
 source $ZSH/oh-my-zsh.sh
 
 # Always launch a ranger session
