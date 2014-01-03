@@ -4,3 +4,6 @@
 [submodule ".config/powerline"]
 	path = .config/powerline
 	url = http://github.com/Lokaltog/powerline
+[submodule "data/powerline-fonts"]
+	path = data/powerline-fonts
+	url = http://github.com/Lokaltog/powerline-fonts
