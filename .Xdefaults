@@ -1,7 +1,7 @@
 URxvt.perl-lib: /home/sylvain/.urxvt/urxvt-perls
 URxvt.scrollBar: False
 URxvt.geometry: 80x24
-URxvt.font: xft:Monospace:size=10
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=10
 URxvt.letterSpace: -2
 URxvt.perl-ext-common: default,keyboard-select,url-select,clipboard
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
@@ -13,7 +13,7 @@ Xft*antialias: true
 Xft*hinting: full
 URxvt.transparent: true
 URxvt.tintColor: white
-URxvt.shading: 36
+URxvt.shading: 32
 URxvt*fading: 26
 
 !-- Tomorrow Color Scheme
