@@ -8,14 +8,8 @@ let maplocalleader ='|'          "mapleader for additional functions
 syntax on                        "syntax highlighting
 set background=dark              "solarized color
 colorscheme solarized
-set guifont=Menlo\ for\ Powerline
-"set guifont=Consolas:h10
-set encoding=utf-8               " Necessary to show unicode glyphs
-if has("gui_running")
-	let Powerline_symbols = 'fancy'
-else
-	let Powerline_symbols = 'compatible'
-endif
+set encoding=utf-8
+set rtp+=~/.config/powerline/powerline/bindings/vim
 
 " From mswin.vim -------------------------------
 
