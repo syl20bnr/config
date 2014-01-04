@@ -7,3 +7,6 @@
 [submodule "data/powerline-fonts"]
 	path = data/powerline-fonts
 	url = http://github.com/Lokaltog/powerline-fonts
+[submodule ".config/solarized"]
+	path = .config/solarized
+	url = http://github.com/altercation/solarized
