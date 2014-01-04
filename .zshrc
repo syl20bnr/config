@@ -15,13 +15,13 @@ else
   print -P "\033AnSiTc %d"
 fi
 
-
 # ----------------------------------------------------------------------------
 # Environment
 # ----------------------------------------------------------------------------
 export PATH=\
-/home/sbenner/.rbenv/shims:\
-/home/sbenner/.rbenv/bin:\
+~/.rbenv/shims:\
+~/.rbenv/bin:\
+~/.config/powerlinerepo/scripts:\
 /usr/lib/lightdm/lightdm:\
 /usr/local/sbin:\
 /usr/local/bin:\

@@ -9,7 +9,7 @@ syntax on                        "syntax highlighting
 set background=dark              "solarized color
 colorscheme solarized
 set encoding=utf-8
-set rtp+=~/.config/powerline/powerline/bindings/vim
+set rtp+=~/.config/powerlinerepo/powerline/bindings/vim
 
 " From mswin.vim -------------------------------
 
