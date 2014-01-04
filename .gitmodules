@@ -1,12 +1,12 @@
 [submodule ".urxvt/urxvt-perls"]
 	path = .urxvt/urxvt-perls
 	url = http://github.com/muennich/urxvt-perls
-[submodule ".config/powerline"]
-	path = .config/powerline
-	url = http://github.com/Lokaltog/powerline
 [submodule "data/powerline-fonts"]
 	path = data/powerline-fonts
 	url = http://github.com/Lokaltog/powerline-fonts
 [submodule ".config/solarized"]
 	path = .config/solarized
 	url = http://github.com/altercation/solarized
+[submodule ".config/powerlinerepo"]
+	path = .config/powerlinerepo
+	url = http://github.com/Lokaltog/powerline
