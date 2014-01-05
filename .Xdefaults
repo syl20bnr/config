@@ -13,8 +13,8 @@ Xft*antialias: true
 Xft*hinting: full
 URxvt.transparent: true
 URxvt.tintColor: white
-URxvt.shading: 32
-URxvt*fading: 26
+URxvt.shading: 18
+URxvt*fading: 32
 
 ! ----------------------------------------------------------------------------
 !-- Solarized dark Color Scheme
