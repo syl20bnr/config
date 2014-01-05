@@ -6,6 +6,7 @@ install: clean update
 .PHONY: update
  update:
 	mkdir -p $(INSTALL_DIR)/.config
+	cp -r .config/fish $(INSTALL_DIR)/.config
 	cp -r .config/powerlinerepo $(INSTALL_DIR)/.config
 	cp -r .config/ranger $(INSTALL_DIR)/.config
 	cp -r .config/solarized $(INSTALL_DIR)/.config
@@ -20,9 +21,11 @@ install: clean update
 
 .PHONY: clean
 clean:
+	rm -rf $(INSTALL_DIR)/.config/fish/functions
 	rm -rf $(INSTALL_DIR)/.config/powerlinerepo
-	rm -rf $(INSTALL_DIR)/.config/ranger
 	rm -rf $(INSTALL_DIR)/.config/solarized
 	rm -rf $(INSTALL_DIR)/.urxvt
 	rm -rf $(INSTALL_DIR)/.vim
+# do no clean
+#	rm -rf $(INSTALL_DIR)/.config/ranger
 
