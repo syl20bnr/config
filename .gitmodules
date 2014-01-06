@@ -10,3 +10,6 @@
 [submodule ".config/powerlinerepo"]
 	path = .config/powerlinerepo
 	url = http://github.com/Lokaltog/powerline
+[submodule ".oh-my-fish"]
+	path = .oh-my-fish
+	url = http://github.com/syl20bnr/oh-my-fish
