@@ -10,6 +10,7 @@ install: clean update
 	cp -r .config/powerlinerepo $(INSTALL_DIR)/.config
 	cp -r .config/ranger $(INSTALL_DIR)/.config
 	cp -r .config/solarized $(INSTALL_DIR)/.config
+	cp -r .oh-my-fish $(INSTALL_DIR)
 	cp -r .urxvt $(INSTALL_DIR)
 	cp -r .vim $(INSTALL_DIR)
 	cp _vimrc $(INSTALL_DIR)
@@ -24,6 +25,7 @@ clean:
 	rm -rf $(INSTALL_DIR)/.config/fish/functions
 	rm -rf $(INSTALL_DIR)/.config/powerlinerepo
 	rm -rf $(INSTALL_DIR)/.config/solarized
+	rm -rf $(INSTALL_DIR)/.oh-my-fish
 	rm -rf $(INSTALL_DIR)/.urxvt
 	rm -rf $(INSTALL_DIR)/.vim
 # do no clean
