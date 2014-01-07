@@ -14,7 +14,7 @@ set fish_plugins vi-mode
 # ----------------------------------------------------------------------------
 set fish_greeting
 set -x ALTERNATE_EDITOR ""
-set -x EDITOR emacsclient
+set -x EDITOR et
 if test -z "$TMUX"
   set -x TERM xterm-256color
 end
