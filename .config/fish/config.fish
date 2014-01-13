@@ -2,7 +2,7 @@
 # oh-my-fish config
 # ----------------------------------------------------------------------------
 set fish_path ~/.oh-my-fish
-set fish_theme simplevi
+set fish_theme syl20bnr
 set vi_mode_default vi_mode_normal
 set fish_plugins vi-mode
 
