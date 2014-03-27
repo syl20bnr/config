@@ -8,15 +8,8 @@ DEFAULT=freenode       \
         grooveshark    \
         psytrancepower
 
-WORK=stratus-wiki     \
-     virga-gitlab     \
-     virga-jenkins    \
-     virga-portal     \
-     virga-quickbuild \
-     virga-rb
-
 OBJ_DEFAULT=$(addprefix $(INSTALL),$(DEFAULT))
-OBJ_WORK=$(addprefix $(INSTALL),$(WORK))
+#OBJ_WORK=$(addprefix $(INSTALL),$(WORK))
 
 default: $(OBJ_DEFAULT)
 

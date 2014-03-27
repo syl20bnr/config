@@ -1,2 +1,0 @@
-#!/bin/sh
-/usr/bin/chromium-browser --app="https://virga-portal.ubisoft.org"
