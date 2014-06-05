@@ -3,15 +3,17 @@
 # ----------------------------------------------------------------------------
 set fish_path ~/.oh-my-fish
 set fish_theme syl20bnr
-set vi_mode_default vi_mode_normal
-set fish_plugins vi-mode
-
-function vi_mode_user_key_bindings
-    bind \co 'ranger-cd ; fish_prompt'  
-end
 
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
+
+function my_fish_key_bindings
+  fish_vi_key_bindings
+  set fish_bind_mode default
+  bind -M insert -m default \n execute
+  bind \co 'ranger-cd ; fish_prompt'  
+end
+set fish_key_bindings my_fish_key_bindings
 
 # ----------------------------------------------------------------------------
 # Environment
