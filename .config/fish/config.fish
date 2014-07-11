@@ -15,6 +15,9 @@ function my_fish_key_bindings
 end
 set fish_key_bindings my_fish_key_bindings
 
+# for mac port
+set -xg PATH /opt/local/bin /opt/local/sbin $PATH
+
 # ----------------------------------------------------------------------------
 # Environment
 # ----------------------------------------------------------------------------
