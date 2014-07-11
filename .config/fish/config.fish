@@ -32,3 +32,5 @@ end
 # aliases
 # ----------------------------------------------------------------------------
 alias np=noproxy
+# force english language
+alias git='env LC_ALL=en_US git'
