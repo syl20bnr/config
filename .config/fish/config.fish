@@ -15,22 +15,29 @@ function my_fish_key_bindings
 end
 set fish_key_bindings my_fish_key_bindings
 
-# for mac port
-set -xg PATH /opt/local/bin /opt/local/sbin $PATH
-
 # ----------------------------------------------------------------------------
 # Environment
 # ----------------------------------------------------------------------------
 set fish_greeting
+
+# use emacs for fast file lookup (using emacs daemon)
 set -x ALTERNATE_EDITOR ""
 set -x EDITOR et
+
+# force fish as the current shell in case of a different default shell
+set -x SHELL /usr/local/bin/fish
+
+# tmux
 if test -z "$TMUX"
   set -x TERM xterm-256color
 end
+
+# for mac port
+set -xg PATH /opt/local/bin /opt/local/sbin $PATH
 
 # ----------------------------------------------------------------------------
 # aliases
 # ----------------------------------------------------------------------------
 alias np=noproxy
-# force english language
+# force english language for git
 alias git='env LC_ALL=en_US git'
