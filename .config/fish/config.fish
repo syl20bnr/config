@@ -35,6 +35,14 @@ end
 # for mac port
 set -xg PATH /opt/local/bin /opt/local/sbin $PATH
 
+# rbenv
+set -gx RBENV_ROOT ~/.rbenv
+if test -e $RBENV_ROOT/bin/rbenv
+  set -xg PATH ~/.rbenv/bin $PATH
+  set -xg PATH ~/.rbenv/shims $PATH
+  . (rbenv init -|psub)
+end
+
 # ----------------------------------------------------------------------------
 # aliases
 # ----------------------------------------------------------------------------
