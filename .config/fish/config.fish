@@ -46,6 +46,7 @@ end
 # ----------------------------------------------------------------------------
 # aliases
 # ----------------------------------------------------------------------------
+alias r=ranger
 alias np=noproxy
 # force english language for git
 alias git='env LC_ALL=en_US git'
