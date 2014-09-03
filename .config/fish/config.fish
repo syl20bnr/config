@@ -33,9 +33,6 @@ if test -z "$TMUX"
   set -x TERM xterm-256color
 end
 
-# for mac port
-set -xg PATH /opt/local/bin /opt/local/sbin $PATH
-
 # rbenv
 set -gx RBENV_ROOT ~/.rbenv
 if test -e $RBENV_ROOT/bin/rbenv
