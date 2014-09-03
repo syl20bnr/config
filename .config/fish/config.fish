@@ -14,6 +14,7 @@ function my_fish_key_bindings
   bind \co 'ranger-cd ; fish_prompt'  
 end
 set fish_key_bindings my_fish_key_bindings
+xset r rate 250 40
 
 # ----------------------------------------------------------------------------
 # Environment
