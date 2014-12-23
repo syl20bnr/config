@@ -1,8 +1,9 @@
 URxvt.perl-lib: /home/sylvain/.urxvt/urxvt-perls
 URxvt.scrollBar: False
 URxvt.geometry: 80x24
-URxvt.font: xft:DejaVu Sans Mono for Powerline:size=10
-URxvt.letterSpace: -2
+URxvt.font: xft:Source Code Pro:pixelsize=13, \
+            xft:Nanum Pen Script:pixelsize=9:antialias=true
+URxvt.letterSpace: -1
 URxvt.perl-ext-common: default,keyboard-select,url-select,clipboard
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-g: perl:keyboard-select:search
@@ -14,7 +15,7 @@ Xft*hinting: full
 URxvt.transparent: true
 URxvt.tintColor: white
 URxvt.shading: 18
-URxvt*fading: 32
+!URxvt*fading: 18
 
 ! ----------------------------------------------------------------------------
 !-- Solarized dark Color Scheme
